@@ -281,7 +281,7 @@ const projects = [
     link: 'https://n-drive.vercel.app/',
   },
   {
-    name: 'Birdbuddy Wiki',
+    name: 'Birdbuddy WIKI',
     description:
       'A public bird encyclopedia featuring over 10,000 species with detailed profiles, images, and habitat information — a Wikipedia for birds, built for the Birdbuddy community.',
     tags: [
@@ -297,7 +297,7 @@ const projects = [
     link: 'https://app.mybirdbuddy.com/bb-wiki',
   },
   {
-    name: 'Birdbuddy Wiki CMS',
+    name: 'Birdbuddy WIKI CMS',
     description:
       'Content management system powering BB Wiki — enabling non-technical team members to create, edit, and publish documentation with a visual editor.',
     tags: [
@@ -363,7 +363,7 @@ const projects = [
     ],
     image: hoteladminpanel,
     source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
-    link: 'https://hotel-admin-panel-xi.vercel.app',
+    link: 'https://elysantium.vercel.app',
   },
   {
     name: 'Blog.dev',
