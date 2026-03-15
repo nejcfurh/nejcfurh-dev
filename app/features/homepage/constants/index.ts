@@ -226,7 +226,7 @@ const projects = [
   {
     name: 'Reusable Components',
     description:
-      'A showcase of 12+ interactive UI components featuring 3D effects, scroll-driven animations, drag & drop, parallax, and holographic tilt cards — built as a living design system.',
+      'A showcase of 15+ interactive UI components featuring 3D effects, scroll-driven animations, drag & drop, parallax, and holographic tilt cards — built as a living design system.',
     tags: [
       { name: 'Next.js', color: '' },
       { name: 'Three.js', color: '' },
