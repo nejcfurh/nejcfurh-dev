@@ -44,15 +44,15 @@ const Hero = (): JSX.Element => {
   return (
     <section
       id="hero"
-      className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden mt-20 sm:mt-0"
+      className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden mt-16 sm:mt-0"
     >
-      {/* Gradient orb */}
+      {/* GRADIENT ORB */}
       <div className="gradient-orb gradient-orb-accent w-[400px] h-[400px] hidden sm:block -bottom-[150px] -left-[150px] absolute" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 w-full flex flex-col lg:flex-row items-center lg:items-end lg:justify-between gap-12 lg:gap-8">
-        {/* Left — text content */}
+        {/* TEXT CONTENT */}
         <div className="flex-1 min-w-0">
-          {/* Label */}
+          {/* LABEL */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -61,14 +61,14 @@ const Hero = (): JSX.Element => {
               delay: 0.2,
               ease: [0.16, 1, 0.3, 1],
             }}
-            className="mb-8"
+            className="mb-8 mt-16 sm:mt-0"
           >
             <span className="text-secondary text-sm font-mono tracking-[0.2em] uppercase">
               Product Engineer & Web Developer
             </span>
           </motion.div>
 
-          {/* Giant name */}
+          {/* GIANT NAME */}
           <div className="overflow-hidden">
             <motion.h1
               className="text-[clamp(60px,12vw,180px)] font-bold leading-[0.85] tracking-tighter sm:ml-[-20px] text-white-100"
@@ -111,7 +111,7 @@ const Hero = (): JSX.Element => {
             </motion.h1>
           </div>
 
-          {/* Subtitle */}
+          {/* SUBTITLE */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -122,7 +122,7 @@ const Hero = (): JSX.Element => {
             Native. Currently at <span className="text-accent">Birdbuddy</span>.
           </motion.p>
 
-          {/* Social links */}
+          {/* SOCIAL LINKS */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -144,7 +144,7 @@ const Hero = (): JSX.Element => {
           </motion.div>
         </div>
 
-        {/* Right — portrait */}
+        {/* PORTRAIT */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -156,18 +156,18 @@ const Hero = (): JSX.Element => {
               src="/images/portrait.jpeg"
               alt="Nejc Furh"
               fill
-              className="object-cover object-top grayscale hover:grayscale-0 transition-all duration-700 rounded-3xl"
+              className="object-cover transition-all duration-700 rounded-3xl"
               priority
               sizes="(max-width: 640px) 300px, (max-width: 1024px) 360px, 420px"
             />
-            {/* Left fade */}
-            <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-primary to-transparent z-10" />
-            {/* Right fade */}
-            <div className="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-primary to-transparent z-10" />
-            {/* Top fade */}
-            <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-primary to-transparent z-10" />
-            {/* Bottom fade */}
-            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-primary to-transparent z-10" />
+            {/* LEFT FADE */}
+            <div className="absolute inset-y-0 left-0 w-1/3 bg-linear-to-r from-primary to-transparent z-10" />
+            {/* RIGHT FADE */}
+            <div className="absolute inset-y-0 right-0 w-1/3 bg-linear-to-l from-primary to-transparent z-10" />
+            {/* TOP FADE */}
+            <div className="absolute inset-x-0 top-0 h-1/3 bg-linear-to-b from-primary to-transparent z-10" />
+            {/* BOTTOM FADE */}
+            <div className="absolute inset-x-0 bottom-12 sm:bottom-0 h-1/2 bg-linear-to-t from-primary to-transparent z-10" />
           </div>
         </motion.div>
       </div>

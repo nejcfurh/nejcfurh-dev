@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { JSX, useRef, useState, useEffect } from "react";
-import SectionHeading from "@/app/components/SectionHeading";
-import Image from "next/image";
-import { experiences } from "../constants";
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { JSX, useRef, useState, useEffect } from 'react';
+import SectionHeading from '@/app/components/SectionHeading';
+import Image from 'next/image';
+import { experiences } from '../constants';
 
 interface StackCardProps {
   experience: (typeof experiences)[0];
@@ -19,10 +19,10 @@ const StackCard = ({
 }: StackCardProps): JSX.Element => {
   return (
     <div
-      className="flex-shrink-0 w-[340px] sm:w-[500px] lg:w-[600px] xl:w-[700px]"
+      className="shrink-0 w-[340px] sm:w-[500px] lg:w-[600px] xl:w-[700px]"
       style={{ zIndex: index }}
     >
-      <div className="p-6 sm:p-8 h-full flex flex-col gap-4 rounded-3xl border border-white/[0.08] bg-[#0a0a0a]">
+      <div className="p-6 sm:p-8 h-full flex flex-col gap-4 rounded-3xl border border-white/8 bg-[#0a0a0a]">
         <div className="flex items-start gap-4">
           <div className="w-14 h-14 rounded-xl bg-white flex items-center justify-center shrink-0 overflow-hidden">
             <Image
@@ -68,7 +68,7 @@ const StackCard = ({
             <div
               key={i}
               className={`h-1 rounded-full ${
-                i <= index ? "w-6 bg-accent" : "w-2 bg-white/10"
+                i <= index ? 'w-6 bg-accent' : 'w-2 bg-white/10'
               }`}
             />
           ))}
@@ -98,8 +98,8 @@ const Experience = (): JSX.Element => {
       }
     };
     measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
   }, []);
 
   const { scrollYProgress } = useScroll({
@@ -120,7 +120,7 @@ const Experience = (): JSX.Element => {
             <div className="gradient-orb gradient-orb-accent w-[400px] h-[400px] hidden sm:block -top-[150px] -right-[150px] absolute" />
             <div className="gradient-orb gradient-orb-accent w-[400px] h-[400px] hidden sm:block -bottom-[150px] -left-[150px] absolute" />
           </div>
-          <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 w-full mb-6">
+          <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 w-full mt-10 sm:mt-0 mb-0 sm:mb-6">
             <SectionHeading label="My Career" title="Work Experience." />
           </div>
 
