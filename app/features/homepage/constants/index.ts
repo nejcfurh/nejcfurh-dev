@@ -234,7 +234,7 @@ const projects = [
       { name: 'Tailwind', color: '' },
     ],
     image: '/images/projects/reusable-components.png',
-    source_code_link: 'https://github.com/NF-7/nejcfurh-studio',
+    source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
     link: 'https://reusable-components-nf.vercel.app/',
   },
   {
@@ -249,7 +249,7 @@ const projects = [
       { name: 'NextAuth', color: '' },
     ],
     image: '/images/projects/twabblr.png',
-    source_code_link: 'https://github.com/NF-7/nejcfurh-studio',
+    source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
     link: 'https://twabblr.vercel.app/',
   },
   {
@@ -263,7 +263,7 @@ const projects = [
       { name: 'Zustand', color: '' },
     ],
     image: '/images/projects/backyard-skies.png',
-    source_code_link: 'https://github.com/NF-7/nejcfurh-studio',
+    source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
     link: 'https://backyard-skies.vercel.app/',
   },
   {
@@ -277,7 +277,7 @@ const projects = [
       { name: 'shadcn/ui', color: '' },
     ],
     image: '/images/projects/n-drive.png',
-    source_code_link: 'https://github.com/NF-7/nejcfurh-studio',
+    source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
     link: 'https://n-drive.vercel.app/',
   },
   {
@@ -320,7 +320,7 @@ const projects = [
       { name: 'Tailwind', color: '' },
     ],
     image: friendsOfNature,
-    source_code_link: 'https://github.com/NF-7/nejcfurh-studio',
+    source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
     link: 'https://friends-of-nature.vercel.app/',
   },
   {
@@ -334,7 +334,7 @@ const projects = [
       { name: 'Tailwind', color: '' },
     ],
     image: petal,
-    source_code_link: 'https://github.com/NF-7/nejcfurh-studio',
+    source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
     link: '',
   },
   {
@@ -348,7 +348,7 @@ const projects = [
       { name: 'Supabase', color: '' },
     ],
     image: todocards,
-    source_code_link: 'https://github.com/NF-7/nejcfurh-studio',
+    source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
     link: 'https://to-do-cards.vercel.app/',
   },
   {
@@ -362,7 +362,7 @@ const projects = [
       { name: 'Recharts', color: '' },
     ],
     image: hoteladminpanel,
-    source_code_link: 'https://github.com/NF-7/nejcfurh-studio',
+    source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
     link: 'https://hotel-admin-panel-xi.vercel.app',
   },
   {
@@ -375,7 +375,7 @@ const projects = [
       { name: 'NextAuth', color: '' },
     ],
     image: blogdev,
-    source_code_link: 'https://github.com/NF-7/nejcfurh-studio',
+    source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
     link: 'https://blog-dev-nf.vercel.app/',
   },
 ];
