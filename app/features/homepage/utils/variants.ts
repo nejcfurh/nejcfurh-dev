@@ -20,7 +20,7 @@ export const textVariant = (delay?: number) => {
 
 export const fadeIn = (
   direction: string,
-  type: string,
+  type: "tween" | "spring" | "inertia",
   delay: number,
   duration: number,
 ) => {
@@ -38,7 +38,7 @@ export const fadeIn = (
         type: type,
         delay: delay,
         duration: duration,
-        ease: [0.16, 1, 0.3, 1],
+        ease: [0.16, 1, 0.3, 1] as const,
       },
     },
   };
@@ -65,7 +65,7 @@ export const zoomIn = (delay: number, duration: number) => {
 
 export const slideIn = (
   direction: string,
-  type: string,
+  type: "tween" | "spring" | "inertia",
   delay: number,
   duration: number,
 ) => {
@@ -81,7 +81,7 @@ export const slideIn = (
         type: type,
         delay: delay,
         duration: duration,
-        ease: [0.16, 1, 0.3, 1],
+        ease: [0.16, 1, 0.3, 1] as const,
       },
     },
   };

@@ -1,14 +1,10 @@
-'use client';
+"use client";
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { JSX, RefObject, useRef, useState, useEffect } from 'react';
-import SectionHeading from '@/app/components/SectionHeading';
-import Image from 'next/image';
-import { experiences } from '../constants';
-
-interface ExperienceProps {
-  mainRef: RefObject<HTMLElement | null>;
-}
+import { motion, useScroll, useTransform } from "framer-motion";
+import { JSX, useRef, useState, useEffect } from "react";
+import SectionHeading from "@/app/components/SectionHeading";
+import Image from "next/image";
+import { experiences } from "../constants";
 
 interface StackCardProps {
   experience: (typeof experiences)[0];
@@ -72,7 +68,7 @@ const StackCard = ({
             <div
               key={i}
               className={`h-1 rounded-full ${
-                i <= index ? 'w-6 bg-accent' : 'w-2 bg-white/10'
+                i <= index ? "w-6 bg-accent" : "w-2 bg-white/10"
               }`}
             />
           ))}
@@ -82,7 +78,7 @@ const StackCard = ({
   );
 };
 
-const Experience = ({ mainRef }: ExperienceProps): JSX.Element => {
+const Experience = (): JSX.Element => {
   const targetRef = useRef<HTMLDivElement>(null);
   const scrollContentRef = useRef<HTMLDivElement>(null);
   const [endX, setEndX] = useState(0);
@@ -102,13 +98,12 @@ const Experience = ({ mainRef }: ExperienceProps): JSX.Element => {
       }
     };
     measure();
-    window.addEventListener('resize', measure);
-    return () => window.removeEventListener('resize', measure);
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
   }, []);
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    container: mainRef,
   });
 
   // Map vertical scroll to exact pixel horizontal translation
