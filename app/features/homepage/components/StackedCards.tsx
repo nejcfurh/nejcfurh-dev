@@ -307,7 +307,7 @@ const CardComponent = ({
           <h2 className="font-bold mt-5 text-xl md:mb-8 md:text-5xl">
             {card.title}
           </h2>
-          <div className="border-t-[1px] border-black/20 w-full my-3" />
+          <div className="border-t border-black/20 w-full my-3" />
           <p className="font-archivo text-base text-center items-center justify-evenly flex w-full flex-col md:text-3xl">
             {card.content.map((item: CardContent, index: number) => (
               <span

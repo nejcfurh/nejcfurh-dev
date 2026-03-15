@@ -53,7 +53,7 @@ const infoCards = [
     icon: Briefcase,
     label: 'Current Role',
     title: 'Product Engineer',
-    subtitle: 'BirdBuddy Inc.',
+    subtitle: 'Birdbuddy Inc.',
     accent: 'from-accent/20 to-transparent',
     delay: 0.1,
   },
@@ -103,7 +103,7 @@ const About = (): JSX.Element => {
             className="glass-card p-8 md:col-span-2 md:row-span-2 relative overflow-hidden"
           >
             {/* Subtle corner accent */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-accent/5 to-transparent rounded-bl-full" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-bl from-accent/5 to-transparent rounded-bl-full" />
 
             <div className="flex items-center gap-2 mb-5">
               <Sparkles size={14} className="text-accent" />
@@ -149,11 +149,11 @@ const About = (): JSX.Element => {
             >
               {/* Gradient background on hover */}
               <div
-                className={`absolute inset-0 bg-gradient-to-br ${card.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                className={`absolute inset-0 bg-linear-to-br ${card.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
               />
 
               <div className="relative z-10 flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center shrink-0 group-hover:border-accent/30 transition-colors duration-300">
+                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/8 flex items-center justify-center shrink-0 group-hover:border-accent/30 transition-colors duration-300">
                   <card.icon size={18} className="text-accent" />
                 </div>
                 <p className="text-secondary text-base font-mono tracking-wider uppercase">
