@@ -116,8 +116,8 @@ const About = (): JSX.Element => {
               I&apos;m a full-stack web developer and product engineer, driven
               by curiosity since childhood — dismantling gadgets and breaking
               them. From &ldquo;Hello, world&rdquo; in plain JavaScript to
-              delivering great experiences in React, I&apos;ve built custom APIs
-              with Node.js and Express, including custom authentication.
+              delivering great experiences in React - I feel there is always
+              more to learn and explore in the world of software development.
             </p>
             <p className="text-secondary leading-relaxed text-[15px] mt-4">
               I obsess over{' '}

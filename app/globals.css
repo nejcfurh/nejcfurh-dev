@@ -30,6 +30,7 @@
 }
 
 @layer components {
+
   /* ---- Scroll Progress Bar ---- */
   .scroll-progress {
     position: fixed;
@@ -146,10 +147,12 @@
   }
 
   @media (max-width: 768px) {
+
     .timeline-line,
     .timeline-line-fill {
       left: 20px;
     }
+
     .timeline-dot {
       left: 20px;
     }
@@ -227,7 +230,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
     opacity: 0;
     transition: opacity 0.3s ease;
   }
@@ -239,14 +242,6 @@
   .magnetic-btn:hover {
     transform: scale(1.05);
     box-shadow: 0 0 40px rgba(96, 134, 190, 0.3);
-  }
-
-  /* ---- Navbar ---- */
-  .nav-glass {
-    background: rgba(5, 5, 5, 0.8);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   /* ---- Social Link ---- */
@@ -298,6 +293,7 @@
 }
 
 @layer utilities {
+
   /* ---- Scroll indicator ---- */
   .scroll-indicator {
     animation: scrollBounce 2s ease-in-out infinite;
@@ -305,6 +301,13 @@
 }
 
 @keyframes scrollBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(8px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(8px);
+  }
 }

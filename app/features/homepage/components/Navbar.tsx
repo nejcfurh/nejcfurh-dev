@@ -85,7 +85,9 @@ const Navbar = (): JSX.Element => {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className={`w-full flex items-center py-4 fixed top-0 z-50 transition-all duration-500 ${
-        scrolled ? 'nav-glass' : 'bg-transparent'
+        scrolled
+          ? 'bg-primary/85 backdrop-blur-xs border-b border-white/6'
+          : 'bg-transparent border-b border-transparent'
       }`}
     >
       <div className="w-full flex justify-between items-center max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">

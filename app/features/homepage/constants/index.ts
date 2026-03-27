@@ -7,7 +7,6 @@ import {
   figma,
   friendsOfNature,
   git,
-  hoteladminpanel,
   html,
   javascript,
   mongodb,
@@ -224,18 +223,18 @@ const testimonials = [
 
 const projects = [
   {
-    name: 'Reusable Components',
+    name: 'Design Lab',
     description:
-      'A showcase of 15+ interactive UI components featuring 3D effects, scroll-driven animations, drag & drop, parallax, and holographic tilt cards — built as a living design system.',
+      'A showcase of multiple pages, interactive UI components featuring 3D effects, scroll-driven animations, drag & drop, parallax, and holographic tilt cards — built as a living reusable design system.',
     tags: [
       { name: 'Next.js', color: '' },
       { name: 'Three.js', color: '' },
       { name: 'Framer Motion', color: '' },
       { name: 'Tailwind', color: '' },
     ],
-    image: '/images/projects/reusable-components.png',
+    image: '/images/projects/design-lab.png',
     source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
-    link: 'https://reusable-components-nf.vercel.app/',
+    link: 'https://design-lab-nf.vercel.app',
   },
   {
     name: 'Twabblr',
@@ -361,7 +360,7 @@ const projects = [
       { name: 'TanStack Query', color: '' },
       { name: 'Recharts', color: '' },
     ],
-    image: hoteladminpanel,
+    image: '/images/projects/elysantium.png',
     source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
     link: 'https://elysantium.vercel.app',
   },

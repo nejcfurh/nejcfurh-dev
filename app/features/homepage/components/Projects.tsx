@@ -27,7 +27,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps): JSX.Element => {
       className="project-card glass-card overflow-hidden group"
     >
       {/* Image */}
-      <div className="relative h-[220px] overflow-hidden">
+      <div className="relative h-[180px] overflow-hidden">
         <Image
           src={project.image}
           alt={project.name}
@@ -64,7 +64,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps): JSX.Element => {
       {/* Content */}
       <div className="p-6">
         <h3 className="text-white-100 font-semibold text-lg">{project.name}</h3>
-        <p className="text-secondary text-sm mt-2 leading-relaxed line-clamp-3">
+        <p className="text-secondary text-sm mt-2 leading-relaxed line-clamp-5">
           {project.description}
         </p>
         <div className="mt-4 flex flex-wrap gap-2">

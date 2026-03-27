@@ -27,7 +27,6 @@ import mzez from './images/experience/mzez.png';
 // PROJECTS
 import todocards from './images/projects/todocards.png';
 import blogdev from './images/projects/devblog.png';
-import hoteladminpanel from './images/projects/hoteladminpanel.png';
 import workease from './images/projects/workease.png';
 import friendsOfNature from './images/projects/friendsofnature.png';
 import petal from './images/projects/petal.png';
@@ -55,7 +54,6 @@ export {
   birdbuddy,
   todocards,
   blogdev,
-  hoteladminpanel,
   workease,
   friendsOfNature,
   petal,
