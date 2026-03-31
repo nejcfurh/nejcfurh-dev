@@ -70,6 +70,7 @@ const GlobalStatsSlide = (): React.JSX.Element => {
               className="font-inter font-bold"
               passedValue={totalBirdObservations}
             />{' '}
+            <br />
             bird observations to science this year.
           </AnimatedText>
         </AnimatedDiv>
