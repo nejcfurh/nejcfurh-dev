@@ -314,7 +314,7 @@ const projects = [
   {
     name: 'Wonder',
     description:
-      'Wonder is a platform for a new product that is currently in development after a successful Kickstarter campaign (raised more than $3.000.000).',
+      'Wonder is a platform for a new product that is currently in development after a successful Kickstarter campaign (raised more than $2.400.000).',
     tags: [
       { name: 'Next.js', color: '' },
       { name: 'Stripe', color: '' },
