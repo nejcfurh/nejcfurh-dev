@@ -27,7 +27,7 @@ const HeroSlide = (): React.ReactNode => {
 
   return (
     isMounted && (
-      <section className="relative flex h-[100vh] w-full flex-col items-center justify-center overflow-hidden sm:h-full">
+      <section className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden sm:h-full">
         {/* BG IMAGE */}
         <Image
           src={backgroundImage}
@@ -62,7 +62,7 @@ const HeroSlide = (): React.ReactNode => {
         <Image
           src={cloudsImage}
           alt="Clouds"
-          className="absolute left-0 top-0 h-full w-full object-cover opacity-70 blur-xl"
+          className="absolute left-0 top-0 h-full w-full object-cover opacity-70 sm:blur-xl"
           width={1000}
           height={1000}
           priority
@@ -109,13 +109,13 @@ const HeroSlide = (): React.ReactNode => {
           className="absolute right-0 top-40 z-40"
           animate={{
             x: [-30, 30, -30],
-            y: [-15, 15, -15]
+            y: [-15, 15, -15],
           }}
           transition={{
             delay: 1.5,
             duration: 25,
             repeat: Infinity,
-            ease: 'easeInOut'
+            ease: 'easeInOut',
           }}
         >
           <Image
@@ -135,13 +135,13 @@ const HeroSlide = (): React.ReactNode => {
           className="absolute bottom-24 left-0"
           animate={{
             x: [20, -40, 20],
-            y: [10, -20, 10]
+            y: [10, -20, 10],
           }}
           transition={{
             delay: 1.5,
             duration: 25,
             repeat: Infinity,
-            ease: 'easeInOut'
+            ease: 'easeInOut',
           }}
         >
           <Image
@@ -157,7 +157,7 @@ const HeroSlide = (): React.ReactNode => {
         </AnimatedDiv>
 
         {/* OPACITY BG */}
-        <div className="absolute left-0 top-0 hidden h-full w-full bg-gradient-to-b from-primary/60 to-amber-50" />
+        <div className="absolute left-0 top-0 hidden h-full w-full bg-linear-to-b from-primary/60 to-amber-50" />
 
         {/* TITLE & SUBTITLE */}
         <div className="relative z-50 mt-16 flex h-[50%] flex-col items-center justify-center px-5 text-center font-inter">

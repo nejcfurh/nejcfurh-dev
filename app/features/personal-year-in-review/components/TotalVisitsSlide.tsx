@@ -27,7 +27,9 @@ const TotalVisitsSlide = ({
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
-        className={clsx('absolute left-0 h-fit w-full -bottom-10')}
+        className={clsx(
+          'absolute left-0 h-fit w-full -bottom-20 sm:-bottom-10',
+        )}
       >
         <Image
           src="/images/projects/personal-year-in-review/slides/feeder-slide-image.png"
@@ -41,7 +43,7 @@ const TotalVisitsSlide = ({
       </AnimatedDiv>
       <div className="container mx-auto flex h-[85%] max-w-5xl flex-col items-center justify-between">
         <AnimatedDiv
-          className="z-50 mt-24 px-6 text-center"
+          className="z-50 mt-20 px-6 text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -82,7 +84,7 @@ const TotalVisitsSlide = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
-          className="z-50 mx-4 mb-2 flex flex-col items-center justify-center rounded-2xl bg-[#D35E5E] px-6 py-4 text-white shadow-lg"
+          className="z-50 mx-4 mb-[-10px] flex flex-col items-center justify-center rounded-2xl bg-[#D35E5E] px-6 py-4 text-white shadow-lg"
         >
           {cappedPercentile >= 36 ? (
             <AnimatedText className="text-center font-inter text-lg font-light text-white">

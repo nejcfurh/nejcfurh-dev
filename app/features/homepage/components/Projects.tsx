@@ -140,10 +140,13 @@ const IPhoneModal = ({ onClose }: { onClose: () => void }): JSX.Element => {
         {/* iPhone outer shell */}
         <div
           className="relative rounded-[54px] bg-[#1a1a1a] p-[14px]"
-          style={{ boxShadow: '0 0 60px 15px rgba(255, 255, 255, 0.15), 0 0 120px 40px rgba(255, 255, 255, 0.05)' }}
+          style={{
+            boxShadow:
+              '0 0 60px 15px rgba(255, 255, 255, 0.15), 0 0 120px 40px rgba(255, 255, 255, 0.05)',
+          }}
         >
           {/* Screen */}
-          <div className="relative w-[370px] h-[800px] rounded-[40px] overflow-hidden bg-black">
+          <div className="relative w-[370px] h-[750px] sm:h-[800px] rounded-[40px] overflow-hidden bg-black">
             <Suspense
               fallback={
                 <div className="flex h-full w-full items-center justify-center bg-[#FFF3DC]">

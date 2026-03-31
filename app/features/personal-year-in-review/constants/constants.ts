@@ -1,4 +1,7 @@
-import { YearInReviewQueryData } from '../types/types';
+import {
+  YearInReviewForUserRareGuestRarityType,
+  YearInReviewQueryData,
+} from '../types/types';
 
 export const MOCK_YEAR_IN_REVIEW_DATA: YearInReviewQueryData = {
   year: 2025,
@@ -372,7 +375,7 @@ export const MOCK_YEAR_IN_REVIEW_DATA: YearInReviewQueryData = {
       ],
     },
     rarityDescription: 'Only 5% of feeders',
-    rarityType: 'RareSpecies',
+    rarityType: YearInReviewForUserRareGuestRarityType.RareSpecies,
     rarityValue: 5,
   },
 
