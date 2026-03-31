@@ -372,7 +372,7 @@ const droneShotVideos = [
   {
     title: 'Monterrigioni, Italy',
     video:
-      'hhttps://zfzxflfhxkzkggphkmqz.supabase.co/storage/v1/object/public/drone-shots/monteriggioni.mp4',
+      'https://zfzxflfhxkzkggphkmqz.supabase.co/storage/v1/object/public/drone-shots/monteriggioni.mp4',
   },
   {
     title: 'Pienza (Elysium fields), Italy',

@@ -3,7 +3,15 @@
 import { motion } from 'framer-motion';
 import { JSX } from 'react';
 import SectionHeading from '@/app/components/SectionHeading';
-import { MapPin, Briefcase, Code, GraduationCap, Sparkles } from 'lucide-react';
+import {
+  MapPin,
+  Briefcase,
+  Code,
+  GraduationCap,
+  Sparkles,
+  Clapperboard,
+} from 'lucide-react';
+import AngledMediaSlider from './AngledMediaSlider';
 import { FaNodeJs, FaReact } from 'react-icons/fa';
 import { FaCss3, FaHtml5, FaJs } from 'react-icons/fa6';
 import { GrGraphQl } from 'react-icons/gr';
@@ -188,6 +196,61 @@ const About = (): JSX.Element => {
               ))}
             </ul>
           </div>
+
+          {/* Drone Shots - spans full width */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-150px' }}
+            transition={{ duration: 0.3, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="md:col-span-4"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.6,
+                delay: 0.6,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="flex items-center gap-2 mb-5"
+            >
+              <Clapperboard size={14} className="text-accent" />
+              <span className="text-accent text-lg font-mono tracking-wider uppercase">
+                Beyond Code
+              </span>
+            </motion.div>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.6,
+                delay: 0.9,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="text-secondary leading-relaxed text-[15px] mb-6 max-w-2xl"
+            >
+              Away from the keyboard I&apos;m usually on a football pitch, in
+              front of a screen for entirely different reasons, or someplace
+              new. The drone is my excuse to slow down and look at a place twice
+              — once on foot, once from above. A few favourites from those trips
+              are below.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.6,
+                delay: 1.2,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+            >
+              <AngledMediaSlider />
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

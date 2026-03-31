@@ -275,6 +275,25 @@
     border: 1px solid rgba(96, 134, 190, 0.2);
   }
 
+  /* ---- Angled Media Slider ---- */
+  .angled-slider {
+    position: relative;
+    height: clamp(300px, 50vw, 500px);
+    grid-template-rows: 1fr;
+    border-radius: 1.5rem;
+    overflow: hidden;
+  }
+
+
+  .angled-slider > li {
+    grid-area: 1 / 1;
+    min-height: 0;
+    height: 100%;
+    transition: clip-path 0.5s ease;
+    will-change: clip-path;
+  }
+
+
   /* ---- Devicon sizing ---- */
   .devicon-react-original-wordmark,
   .devicon-jquery-plain-wordmark,
