@@ -202,7 +202,7 @@ const projects = [
     tags: [
       { name: 'Next.js', color: '' },
       { name: 'Three.js', color: '' },
-      { name: 'Framer Motion', color: '' },
+      { name: 'Motion', color: '' },
       { name: 'Tailwind', color: '' },
     ],
     image: '/images/projects/design-lab.png',
@@ -303,7 +303,7 @@ const projects = [
       'Conservation initiative website with full-screen animations, parallax effects, stacked cards, interactive carousels, and page visit analytics.',
     tags: [
       { name: 'Next.js', color: '' },
-      { name: 'Framer Motion', color: '' },
+      { name: 'Motion', color: '' },
       { name: 'Tailwind', color: '' },
       { name: 'AI SDK', color: '' },
     ],
