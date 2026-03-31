@@ -191,10 +191,10 @@
   .form-input {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 0.75rem;
-    padding: 1rem 1.25rem;
+    border-radius: 0.625rem;
+    padding: 0.875rem 1rem;
     color: var(--foreground);
-    font-size: 1rem;
+    font-size: 0.875rem;
     transition: border-color 0.3s ease;
     outline: none;
     width: 100%;
@@ -206,24 +206,6 @@
 
   .form-input::placeholder {
     color: var(--muted);
-  }
-
-  /* ---- Magnetic Button ---- */
-  .magnetic-btn {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 2.5rem;
-    border-radius: 9999px;
-    background: var(--accent);
-    color: white;
-    font-weight: 500;
-    font-size: 1rem;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    overflow: hidden;
   }
 
   .magnetic-btn::before {
@@ -285,7 +267,7 @@
   }
 
 
-  .angled-slider > li {
+  .angled-slider>li {
     grid-area: 1 / 1;
     min-height: 0;
     height: 100%;

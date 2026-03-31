@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import emailjs from "@emailjs/browser";
-import { JSX, useRef, useState } from "react";
-import toast from "react-hot-toast";
-import { motion } from "framer-motion";
-import { Send } from "lucide-react";
-import SectionHeading from "@/app/components/SectionHeading";
+import emailjs from '@emailjs/browser';
+import { JSX, useRef, useState } from 'react';
+import toast from 'react-hot-toast';
+import { motion } from 'framer-motion';
+import { Send, Download } from 'lucide-react';
+import SectionHeading from '@/app/components/SectionHeading';
 
 const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
 const serviceId =
@@ -16,20 +16,20 @@ const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 const isEmailConfigured = Boolean(templateId && serviceId && publicKey);
 
 const toastStyle = {
-  border: "1px solid rgba(96, 134, 190, 0.3)",
-  borderRadius: "12px",
-  padding: "16px 20px",
-  color: "#fafafa",
-  background: "rgba(17, 17, 17, 0.95)",
-  backdropFilter: "blur(12px)",
+  border: '1px solid rgba(96, 134, 190, 0.3)',
+  borderRadius: '12px',
+  padding: '16px 20px',
+  color: '#fafafa',
+  background: 'rgba(17, 17, 17, 0.95)',
+  backdropFilter: 'blur(12px)',
 };
 
 const Contact = (): JSX.Element => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const [form, setForm] = useState({
-    name: "",
-    email: "",
-    message: "",
+    name: '',
+    email: '',
+    message: '',
   });
   const [loading, setLoading] = useState(false);
 
@@ -44,11 +44,11 @@ const Contact = (): JSX.Element => {
     e.preventDefault();
     if (!isEmailConfigured) {
       toast.error(
-        "Contact form is not configured. Add EmailJS keys in environment variables.",
+        'Contact form is not configured. Add EmailJS keys in environment variables.',
         {
           duration: 4000,
           style: toastStyle,
-          iconTheme: { primary: "#ef4444", secondary: "#fafafa" },
+          iconTheme: { primary: '#ef4444', secondary: '#fafafa' },
         },
       );
       return;
@@ -57,10 +57,10 @@ const Contact = (): JSX.Element => {
 
     if (!form.name || !form.email || !form.message) {
       setLoading(false);
-      return toast.error("Please fill in all fields.", {
+      return toast.error('Please fill in all fields.', {
         duration: 1500,
         style: toastStyle,
-        iconTheme: { primary: "#ef4444", secondary: "#fafafa" },
+        iconTheme: { primary: '#ef4444', secondary: '#fafafa' },
       });
     }
 
@@ -70,9 +70,9 @@ const Contact = (): JSX.Element => {
         templateId!,
         {
           from_name: form.name,
-          to_name: "Nejc",
+          to_name: 'Nejc',
           from_email: form.email,
-          to_email: "nejc.furh7@gmail.com",
+          to_email: 'nejc.furh7@gmail.com',
           message: form.message,
         },
         publicKey!,
@@ -80,20 +80,20 @@ const Contact = (): JSX.Element => {
       .then(
         () => {
           setLoading(false);
-          toast.success("Message sent successfully!", {
+          toast.success('Message sent successfully!', {
             duration: 2000,
             style: toastStyle,
-            iconTheme: { primary: "#22c55e", secondary: "#fafafa" },
+            iconTheme: { primary: '#22c55e', secondary: '#fafafa' },
           });
-          setForm({ name: "", email: "", message: "" });
+          setForm({ name: '', email: '', message: '' });
         },
-        (error) => {
+        error => {
           setLoading(false);
           console.error(error);
-          toast.error("Something went wrong. Please try again.", {
+          toast.error('Something went wrong. Please try again.', {
             duration: 1500,
             style: toastStyle,
-            iconTheme: { primary: "#ef4444", secondary: "#fafafa" },
+            iconTheme: { primary: '#ef4444', secondary: '#fafafa' },
           });
         },
       );
@@ -130,6 +130,18 @@ const Contact = (): JSX.Element => {
                   nejc.furh7@gmail.com
                 </span>
               </div>
+              <a
+                href="/data/NF.CV.2026-ENG.pdf"
+                download
+                className="flex items-center gap-3 group"
+              >
+                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
+                  <Download size={16} className="text-accent" />
+                </div>
+                <span className="text-secondary text-sm group-hover:text-white-100 transition-colors">
+                  Download CV
+                </span>
+              </a>
             </div>
           </motion.div>
 
@@ -147,7 +159,7 @@ const Contact = (): JSX.Element => {
             <form
               ref={formRef}
               onSubmit={handleSubmit}
-              className="glass-card p-8 space-y-6"
+              className="glass-card p-8 space-y-4"
             >
               <div>
                 <label
@@ -192,20 +204,20 @@ const Contact = (): JSX.Element => {
                 </label>
                 <textarea
                   id="message"
-                  rows={5}
+                  rows={4}
                   name="message"
                   value={form.message}
                   onChange={handleChange}
-                  placeholder="Tell me about your project..."
+                  placeholder="Your message for me..."
                   className="form-input resize-none"
                 />
               </div>
               <button
                 type="submit"
                 disabled={loading}
-                className="magnetic-btn w-full disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full disabled:opacity-50 disabled:cursor-not-allowed text-sm bg-(--accent) py-2 px-4 rounded-full font-medium"
               >
-                {loading ? "Sending..." : "Send Message"}
+                {loading ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </motion.div>
