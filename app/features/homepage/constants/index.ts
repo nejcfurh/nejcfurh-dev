@@ -194,33 +194,6 @@ const experiences = [
   },
 ];
 
-const testimonials = [
-  {
-    testimonial:
-      'I thought it was impossible to make a website as beautiful as our product, but Nejc proved me wrong.',
-    name: 'Sara Lee',
-    designation: 'CFO',
-    company: 'Acme Co',
-    image: 'https://randomuser.me/api/portraits/women/4.jpg',
-  },
-  {
-    testimonial:
-      "I've never met a web developer who truly cares about their clients' success like Nejc does.",
-    name: 'Chris Brown',
-    designation: 'COO',
-    company: 'DEF Corp',
-    image: 'https://randomuser.me/api/portraits/men/5.jpg',
-  },
-  {
-    testimonial:
-      "After Nejc optimized our website, our traffic increased by 50%. We can't thank them enough!",
-    name: 'Lisa Wang',
-    designation: 'CTO',
-    company: '456 Enterprises',
-    image: 'https://randomuser.me/api/portraits/women/6.jpg',
-  },
-];
-
 const projects = [
   {
     name: 'Design Lab',
@@ -310,6 +283,21 @@ const projects = [
     link: '',
   },
   {
+    name: 'Birdbuddy Year in Birds',
+    description:
+      'Birdbuddy Year in Birds is a spinoff of Spotify Wrapped, but for birds. Link leads to a global overview, preview opens a personalized Year in Birds that each Birdbuddy user received.',
+    tags: [
+      { name: 'Next.js', color: '' },
+      { name: 'Tailwind', color: '' },
+      { name: 'GraphQL', color: '' },
+      { name: 'Motion', color: '' },
+    ],
+    image: '/images/projects/bb-year-in-birds.png',
+    source_code_link: '',
+    link: 'https://year-in-review.mybirdbuddy.com',
+    has_preview: true,
+  },
+  {
     name: 'Friends of Nature',
     description:
       'Conservation initiative website with full-screen animations, parallax effects, stacked cards, interactive carousels, and page visit analytics.',
@@ -317,15 +305,16 @@ const projects = [
       { name: 'Next.js', color: '' },
       { name: 'Framer Motion', color: '' },
       { name: 'Tailwind', color: '' },
+      { name: 'AI SDK', color: '' },
     ],
     image: friendsOfNature,
     source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
     link: 'https://friends-of-nature.vercel.app/',
   },
   {
-    name: 'Experience Wonder',
+    name: 'Wonder',
     description:
-      'A collection of marketing and product pages for a fast-growing startup aiming for a Kickstarter launch — showcasing design and development skills.',
+      'Wonder is a platform for a new product that is currently in development after a successful Kickstarter campaign (raised more than $3.000.000).',
     tags: [
       { name: 'Next.js', color: '' },
       { name: 'Stripe', color: '' },
@@ -333,8 +322,8 @@ const projects = [
       { name: 'Tailwind', color: '' },
     ],
     image: petal,
-    source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
-    link: '',
+    source_code_link: '',
+    link: 'https://www.experiencewonder.com',
   },
   {
     name: 'ToDoCards',
@@ -402,11 +391,4 @@ const droneShotVideos = [
   },
 ];
 
-export {
-  services,
-  technologies,
-  experiences,
-  testimonials,
-  projects,
-  droneShotVideos,
-};
+export { services, technologies, experiences, projects, droneShotVideos };

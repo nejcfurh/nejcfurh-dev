@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import localFont from 'next/font/local';
+import { Geist, Geist_Mono, Inter } from 'next/font/google';
 import './globals.css';
 import { Toaster } from 'react-hot-toast';
 
@@ -11,6 +12,27 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+});
+
+const inter = Inter({
+  variable: '--font-inter',
+  subsets: ['latin'],
+});
+
+const awesomeSerif = localFont({
+  variable: '--font-awesome-serif',
+  src: [
+    {
+      path: '../public/fonts/awesome-serif-var-tf.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/awesome-serif-italic-var-vf.ttf',
+      weight: '300',
+      style: 'italic',
+    },
+  ],
 });
 
 export const metadata: Metadata = {
@@ -27,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-primary text-white-100`}
+        className={`${geistSans.variable} ${geistMono.variable} ${awesomeSerif.variable} ${inter.variable} font-sans antialiased bg-primary text-white-100`}
       >
         <Toaster />
         {children}
