@@ -208,24 +208,6 @@
     color: var(--muted);
   }
 
-  .magnetic-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .magnetic-btn:hover::before {
-    opacity: 1;
-  }
-
-  .magnetic-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 40px rgba(96, 134, 190, 0.3);
-  }
-
   /* ---- Social Link ---- */
   .social-link {
     display: flex;

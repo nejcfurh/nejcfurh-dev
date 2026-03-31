@@ -117,7 +117,7 @@ const Navbar = (): JSX.Element => {
                   onClick={() => setActive(link.title)}
                   className={
                     isContact
-                      ? 'magnetic-btn py-2! px-5! text-sm!'
+                      ? 'inline-block bg-(--accent) rounded-full py-1.5 px-4 text-sm font-medium transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-[0_0_25px_rgba(96,134,190,0.25)]'
                       : `text-sm transition-colors duration-300 ${
                           active === link.title
                             ? 'text-white-100'

@@ -215,7 +215,7 @@ const Contact = (): JSX.Element => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full disabled:opacity-50 disabled:cursor-not-allowed text-sm bg-(--accent) py-2 px-4 rounded-full font-medium"
+                className="w-full disabled:opacity-50 disabled:cursor-not-allowed text-sm bg-(--accent) py-2 px-4 rounded-full font-medium transition-all duration-300 ease-in-out hover:shadow-[0_0_15px_rgba(96,134,190,0.2)] cursor-pointer"
               >
                 {loading ? 'Sending...' : 'Send Message'}
               </button>
