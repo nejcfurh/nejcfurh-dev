@@ -371,23 +371,19 @@ const projects = [
 const droneShotVideos = [
   {
     title: 'Monterrigioni, Italy',
-    video:
-      'https://zfzxflfhxkzkggphkmqz.supabase.co/storage/v1/object/public/drone-shots/monteriggioni.mp4',
+    video: '/videos/drone-shots/monteriggioni.mp4',
   },
   {
     title: 'Pienza (Elysium fields), Italy',
-    video:
-      'https://zfzxflfhxkzkggphkmqz.supabase.co/storage/v1/object/public/drone-shots/pienza-fields.mp4',
+    video: '/videos/drone-shots/pienza-fields.mp4',
   },
   {
     title: 'San Galgano, Italy',
-    video:
-      'https://zfzxflfhxkzkggphkmqz.supabase.co/storage/v1/object/public/drone-shots/san-galgano.mp4',
+    video: '/videos/drone-shots/san-galgano.mp4',
   },
   {
     title: 'Volterra, Italy',
-    video:
-      'https://zfzxflfhxkzkggphkmqz.supabase.co/storage/v1/object/public/drone-shots/volterra.mp4',
+    video: '/videos/drone-shots/volterra.mp4',
   },
 ];
 

@@ -52,6 +52,7 @@ const ProjectCard = ({
               <Link
                 href={project.source_code_link}
                 target="_blank"
+                aria-label="GitHub"
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-black/50 flex items-center justify-center hover:bg-black/75 transition-colors ease-out duration-300"
               >
@@ -62,6 +63,7 @@ const ProjectCard = ({
               <Link
                 href={project.link}
                 target="_blank"
+                aria-label="Live Demo"
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-black/50 flex items-center justify-center hover:bg-black/75 transition-colors ease-out duration-300"
               >
