@@ -22,16 +22,18 @@ const StackCard = ({
       className="shrink-0 w-[340px] sm:w-[500px] lg:w-[600px] xl:w-[700px]"
       style={{ zIndex: index }}
     >
-      <div className="p-6 sm:p-8 h-full flex flex-col gap-4 rounded-3xl border border-white/8 bg-[#0a0a0a]">
+      <div className="p-6 sm:p-8 h-full flex flex-col gap-4 rounded-3xl border border-(--card-border) bg-tertiary">
         <div className="flex items-start gap-4">
           <div className="w-14 h-14 rounded-xl bg-white flex items-center justify-center shrink-0 overflow-hidden">
-            <Image
-              src={experience.icon}
-              alt={experience.company_name}
-              width={40}
-              height={40}
-              className="object-contain"
-            />
+            <div className="relative w-10 h-10">
+              <Image
+                src={experience.icon}
+                alt={experience.company_name}
+                fill
+                sizes="40px"
+                className="object-contain"
+              />
+            </div>
           </div>
           <div className="min-w-0">
             <h3 className="text-white-100 font-semibold text-lg leading-tight">
@@ -68,7 +70,7 @@ const StackCard = ({
             <div
               key={i}
               className={`h-1 rounded-full ${
-                i <= index ? 'w-6 bg-accent' : 'w-2 bg-white/10'
+                i <= index ? 'w-6 bg-accent' : 'w-2 bg-(--chip-bg-hover)'
               }`}
             />
           ))}

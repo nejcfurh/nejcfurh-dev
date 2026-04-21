@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { BsGithub, BsTwitterX } from 'react-icons/bs';
 import { SlSocialLinkedin } from 'react-icons/sl';
 import { TbBrandInstagram } from 'react-icons/tb';
+import { useTheme } from '@/app/components/theme/ThemeProvider';
 
 const socialLinks = [
   {
@@ -41,6 +42,9 @@ const firstName = 'NEJC';
 const lastName = 'FURH';
 
 const Hero = (): JSX.Element => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   return (
     <section
       id="hero"
@@ -136,7 +140,7 @@ const Hero = (): JSX.Element => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
-                className={`w-11 h-11 rounded-full outline outline-white/20 bg-transparent grid place-items-center text-white-100 cursor-pointer transition-all duration-300 hover:outline-offset-[3px] ${social.hoverClass}`}
+                className={`w-11 h-11 rounded-full outline outline-(--outline-subtle)  bg-transparent grid place-items-center text-white-100 cursor-pointer transition-all duration-300 hover:outline-offset-[3px] ${social.hoverClass}`}
               >
                 {social.icon}
               </Link>
@@ -151,23 +155,31 @@ const Hero = (): JSX.Element => {
           transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="relative shrink-0"
         >
-          <div className="relative w-[300px] h-[400px] sm:w-[360px] sm:h-[480px] lg:w-[420px] lg:h-[560px]">
+          <div
+            className={`relative w-[300px] h-[400px] sm:w-[360px] sm:h-[480px] lg:w-[420px] lg:h-[560px] ${
+              isDark
+                ? ''
+                : 'rounded-3xl overflow-hidden ring-1 ring-(--card-border) shadow-[0_30px_80px_-20px_rgba(10,10,10,0.25)]'
+            }`}
+            style={
+              isDark
+                ? {
+                    maskImage:
+                      'radial-gradient(ellipse 45% 50% at 50% 50%, black 40%, transparent 100%)',
+                    WebkitMaskImage:
+                      'radial-gradient(ellipse 45% 50% at 50% 50%, black 40%, transparent 100%)',
+                  }
+                : undefined
+            }
+          >
             <Image
               src="/images/portrait.jpeg"
               alt="Nejc Furh"
               fill
-              className="object-cover transition-all duration-700 rounded-3xl"
+              className="object-cover transition-all duration-700"
               priority
               sizes="(max-width: 640px) 300px, (max-width: 1024px) 360px, 420px"
             />
-            {/* LEFT FADE */}
-            <div className="absolute inset-y-0 left-0 w-1/3 bg-linear-to-r from-primary to-transparent z-10" />
-            {/* RIGHT FADE */}
-            <div className="absolute inset-y-0 right-0 w-1/3 bg-linear-to-l from-primary to-transparent z-10" />
-            {/* TOP FADE */}
-            <div className="absolute inset-x-0 top-0 h-1/3 bg-linear-to-b from-primary to-transparent z-10" />
-            {/* BOTTOM FADE */}
-            <div className="absolute inset-x-0 bottom-12 sm:bottom-0 h-1/2 bg-linear-to-t from-primary to-transparent z-10" />
           </div>
         </motion.div>
       </div>

@@ -10,13 +10,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#050505",
-        secondary: "#888888",
-        tertiary: "#111111",
-        accent: "#6086BE",
-        "accent-light": "#8aaed6",
-        "card-bg": "rgba(255, 255, 255, 0.03)",
-        "white-100": "#fafafa",
+        primary: "var(--background)",
+        secondary: "var(--muted)",
+        tertiary: "var(--surface)",
+        accent: "var(--accent)",
+        "accent-light": "var(--accent-light)",
+        "card-bg": "var(--card-bg)",
+        "white-100": "var(--foreground)",
       },
       boxShadow: {
         card: "0px 35px 120px -15px #211e35",

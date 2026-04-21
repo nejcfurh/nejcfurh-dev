@@ -65,8 +65,8 @@ const AngledMediaSlider = () => {
   return (
     <div className="relative rounded-3xl overflow-hidden">
       <div
-        className="absolute inset-0 z-10 pointer-events-none rounded-3xl border border-gray-700/50"
-        style={{ boxShadow: 'inset 0 0 80px 30px rgba(5, 5, 5, 0.7)' }}
+        className="absolute inset-0 z-10 pointer-events-none rounded-3xl border border-(--slider-border)"
+        style={{ boxShadow: 'inset 0 0 80px 30px var(--slider-vignette)' }}
       />
       <ul className="angled-slider relative m-0 grid list-none p-0">
         {droneShotVideos.map((item, idx) => {

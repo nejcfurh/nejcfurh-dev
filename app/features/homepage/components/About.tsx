@@ -161,7 +161,7 @@ const About = (): JSX.Element => {
               />
 
               <div className="relative z-10 flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/8 flex items-center justify-center shrink-0 group-hover:border-accent/30 transition-colors duration-300">
+                <div className="w-10 h-10 rounded-xl bg-(--chip-bg) border border-(--card-border) flex items-center justify-center shrink-0 group-hover:border-accent/30 transition-colors duration-300">
                   <card.icon size={18} className="text-accent" />
                 </div>
                 <p className="text-secondary text-base font-mono tracking-wider uppercase">
@@ -189,7 +189,7 @@ const About = (): JSX.Element => {
                   whileInView="animate"
                   viewport={{ once: true }}
                   custom={index}
-                  className="border border-white/10 rounded-2xl px-4 py-2 flex items-center gap-3 min-w-[120px] justify-center text-sm text-white-100 hover:border-accent/30 hover:bg-accent/5 transition-colors duration-300"
+                  className="border border-(--card-border) rounded-2xl px-4 py-2 flex items-center gap-3 min-w-[120px] justify-center text-sm text-white-100 hover:border-accent/30 hover:bg-accent/5 transition-colors duration-300"
                 >
                   {tech.icon} {tech.name}
                 </motion.li>

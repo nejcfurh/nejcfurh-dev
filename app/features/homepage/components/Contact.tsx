@@ -16,11 +16,11 @@ const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 const isEmailConfigured = Boolean(templateId && serviceId && publicKey);
 
 const toastStyle = {
-  border: '1px solid rgba(96, 134, 190, 0.3)',
+  border: '1px solid var(--toast-border)',
   borderRadius: '12px',
   padding: '16px 20px',
-  color: '#fafafa',
-  background: 'rgba(17, 17, 17, 0.95)',
+  color: 'var(--toast-text)',
+  background: 'var(--toast-bg)',
   backdropFilter: 'blur(12px)',
 };
 
@@ -123,7 +123,7 @@ const Contact = (): JSX.Element => {
             </p>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-(--chip-bg) flex items-center justify-center">
                   <Send size={16} className="text-accent" />
                 </div>
                 <span className="text-secondary text-sm">
@@ -135,7 +135,7 @@ const Contact = (): JSX.Element => {
                 download
                 className="flex items-center gap-3 group"
               >
-                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
+                <div className="w-10 h-10 rounded-xl bg-(--chip-bg) flex items-center justify-center group-hover:bg-(--chip-bg-hover) transition-colors">
                   <Download size={16} className="text-accent" />
                 </div>
                 <span className="text-secondary text-sm group-hover:text-white-100 transition-colors">
@@ -215,7 +215,7 @@ const Contact = (): JSX.Element => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full disabled:opacity-50 disabled:cursor-not-allowed text-sm bg-(--accent) py-2 px-4 rounded-full font-medium transition-all duration-300 ease-in-out hover:shadow-[0_0_15px_rgba(96,134,190,0.2)] cursor-pointer"
+                className="w-full disabled:opacity-50 disabled:cursor-not-allowed text-sm bg-(--accent) text-white py-2 px-4 rounded-full font-medium transition-all duration-300 ease-in-out hover:shadow-[0_0_15px_var(--accent-glow)] cursor-pointer"
               >
                 {loading ? 'Sending...' : 'Send Message'}
               </button>
