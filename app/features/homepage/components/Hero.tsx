@@ -48,7 +48,7 @@ const Hero = (): JSX.Element => {
   return (
     <section
       id="hero"
-      className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden mt-16 sm:mt-0"
+      className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden py-24 sm:py-0"
     >
       {/* GRADIENT ORB */}
       <div className="gradient-orb gradient-orb-accent w-[400px] h-[400px] hidden sm:block -bottom-[150px] -left-[150px] absolute" />
@@ -65,7 +65,7 @@ const Hero = (): JSX.Element => {
               delay: 0.2,
               ease: [0.16, 1, 0.3, 1],
             }}
-            className="mb-8 mt-16 sm:mt-0"
+            className="mb-8"
           >
             <span className="text-secondary text-sm font-mono tracking-[0.2em] uppercase">
               Product Engineer & Web Developer
