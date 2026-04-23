@@ -43,6 +43,7 @@ const ProjectCard = ({
           src={project.image}
           alt={project.name}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="project-card-image object-cover"
         />
         {/* Hover overlay */}
@@ -56,7 +57,7 @@ const ProjectCard = ({
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-black/50 flex items-center justify-center hover:bg-black/75 transition-colors ease-out duration-300"
               >
-                <Github size={20} className="text-white-100" />
+                <Github size={20} className="text-white" />
               </Link>
             )}
             {project.link && (
@@ -67,7 +68,7 @@ const ProjectCard = ({
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-black/50 flex items-center justify-center hover:bg-black/75 transition-colors ease-out duration-300"
               >
-                <ExternalLink size={20} className="text-white-100" />
+                <ExternalLink size={20} className="text-white" />
               </Link>
             )}
             {hasPreview && (
@@ -75,7 +76,7 @@ const ProjectCard = ({
                 onClick={onPreview}
                 className="w-12 h-12 rounded-full bg-black/50 flex items-center justify-center hover:bg-black/75 transition-colors ease-out duration-300 cursor-pointer"
               >
-                <Eye size={20} className="text-white-100" />
+                <Eye size={20} className="text-white" />
               </button>
             )}
           </div>
@@ -126,6 +127,7 @@ const IPhoneModal = ({ onClose }: { onClose: () => void }): JSX.Element => {
       <button
         onClick={onClose}
         className="absolute top-6 right-6 z-10 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+        aria-label="Close preview"
       >
         <X size={20} className="text-white" />
       </button>
@@ -144,7 +146,7 @@ const IPhoneModal = ({ onClose }: { onClose: () => void }): JSX.Element => {
           className="relative rounded-[54px] bg-[#1a1a1a] p-[14px]"
           style={{
             boxShadow:
-              '0 0 60px 15px rgba(255, 255, 255, 0.15), 0 0 120px 40px rgba(255, 255, 255, 0.05)',
+              '0 0 60px 15px var(--accent-glow), 0 0 120px 40px var(--accent-glow-soft)',
           }}
         >
           {/* Screen */}

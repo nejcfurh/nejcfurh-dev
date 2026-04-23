@@ -3,11 +3,11 @@
 import { JSX, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
-import Image from 'next/image';
-import { logo } from '@/public';
 import { navLinks } from '../constants';
+import Logo from '@/app/components/Logo';
 import { MenuIcon, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import ThemeToggle from '@/app/components/theme/ThemeToggle';
 
 const Navbar = (): JSX.Element => {
   const [active, setActive] = useState('');
@@ -36,7 +36,7 @@ const Navbar = (): JSX.Element => {
           className="fixed inset-0 min-h-dvh w-full bg-primary/85 backdrop-blur-sm z-100 flex flex-col items-center justify-center pt-20 pb-12"
         >
           <button
-            className="absolute top-3 right-4 w-10 h-10 flex items-center justify-center cursor-pointer text-white-100 rounded-full hover:bg-white/10 transition-colors"
+            className="absolute top-3 right-4 w-10 h-10 flex items-center justify-center cursor-pointer text-white-100 rounded-full hover:bg-(--chip-bg-hover) transition-colors"
             onClick={() => setToggle(false)}
             aria-label="Close menu"
           >
@@ -86,7 +86,7 @@ const Navbar = (): JSX.Element => {
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className={`w-full flex items-center py-4 fixed top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-primary/85 backdrop-blur-xs border-b border-white/6'
+          ? 'bg-primary/85 backdrop-blur-xs border-b border-(--divider)'
           : 'bg-transparent border-b border-transparent'
       }`}
     >
@@ -99,46 +99,45 @@ const Navbar = (): JSX.Element => {
             window.scrollTo(0, 0);
           }}
         >
-          <Image
-            src={logo}
-            alt="logo"
-            className="w-[120px] object-contain"
-            priority
-          />
+          <Logo className="w-[120px] h-auto" />
         </Link>
 
-        <ul className="list-none hidden md:flex flex-row gap-8 items-center">
-          {navLinks.map(link => {
-            const isContact = link.id === 'contact';
-            return (
-              <li key={link.id}>
-                <a
-                  href={`#${link.id}`}
-                  onClick={() => setActive(link.title)}
-                  className={
-                    isContact
-                      ? 'inline-block bg-(--accent) rounded-full py-1.5 px-4 text-sm font-medium transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-[0_0_25px_rgba(96,134,190,0.25)]'
-                      : `text-sm transition-colors duration-300 ${
-                          active === link.title
-                            ? 'text-white-100'
-                            : 'text-secondary hover:text-white-100'
-                        }`
-                  }
-                >
-                  {link.title}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="flex items-center gap-2 md:gap-6">
+          <ul className="list-none hidden md:flex flex-row gap-8 items-center">
+            {navLinks.map(link => {
+              const isContact = link.id === 'contact';
+              return (
+                <li key={link.id}>
+                  <a
+                    href={`#${link.id}`}
+                    onClick={() => setActive(link.title)}
+                    className={
+                      isContact
+                        ? 'inline-block bg-(--accent) text-white rounded-full py-1.5 px-4 text-sm font-medium transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-[0_0_25px_var(--accent-glow)]'
+                        : `text-sm transition-colors duration-300 ${
+                            active === link.title
+                              ? 'text-white-100'
+                              : 'text-secondary hover:text-white-100'
+                          }`
+                    }
+                  >
+                    {link.title}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
 
-        <button
-          className="md:hidden w-7 h-7 flex items-center justify-center cursor-pointer text-white-100"
-          onClick={() => setToggle(!toggle)}
-          aria-label={toggle ? 'Close menu' : 'Open menu'}
-        >
-          <MenuIcon size={24} />
-        </button>
+          <ThemeToggle />
+
+          <button
+            className="md:hidden w-7 h-7 flex items-center justify-center cursor-pointer text-white-100"
+            onClick={() => setToggle(!toggle)}
+            aria-label={toggle ? 'Close menu' : 'Open menu'}
+          >
+            <MenuIcon size={24} />
+          </button>
+        </div>
 
         {mounted && createPortal(mobileMenu, document.body)}
       </div>

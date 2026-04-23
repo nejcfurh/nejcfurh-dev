@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 import { Geist, Geist_Mono, Inter } from 'next/font/google';
 import './globals.css';
 import { Toaster } from 'react-hot-toast';
+import { ThemeProvider } from './components/theme/ThemeProvider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -47,12 +48,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${awesomeSerif.variable} ${inter.variable} font-sans antialiased bg-primary text-white-100`}
       >
-        <Toaster />
-        {children}
+        <ThemeProvider>
+          <Toaster />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
