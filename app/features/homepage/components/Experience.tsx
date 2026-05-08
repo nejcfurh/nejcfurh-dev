@@ -10,16 +10,18 @@ interface StackCardProps {
   experience: (typeof experiences)[0];
   index: number;
   total: number;
+  className?: string;
 }
 
 const StackCard = ({
   experience,
   index,
   total,
+  className = '',
 }: StackCardProps): JSX.Element => {
   return (
     <div
-      className="shrink-0 w-[340px] sm:w-[500px] lg:w-[600px] xl:w-[700px]"
+      className={`shrink-0 w-[340px] sm:w-[500px] lg:w-[600px] xl:w-[700px] ${className}`}
       style={{ zIndex: index }}
     >
       <div className="p-6 sm:p-8 h-full flex flex-col gap-4 rounded-3xl border border-(--card-border) bg-tertiary">
@@ -113,20 +115,35 @@ const Experience = (): JSX.Element => {
 
   return (
     <section id="experience" className="relative">
-      {/* Tall container — creates scroll distance */}
-      <div ref={targetRef} className="h-[400vh] relative">
-        {/* Sticky viewport */}
+      {/* Mobile: native horizontal swipe, no boxed container */}
+      <div className="md:hidden">
+        <div className="max-w-6xl mx-auto px-6 w-full pt-16 pb-8">
+          <SectionHeading label="My Career" title="Work Experience." />
+        </div>
+        <div className="flex items-stretch gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-6 px-6 pb-16 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          {[...experiences].reverse().map((experience, index) => (
+            <StackCard
+              key={experience.title + experience.date}
+              experience={experience}
+              index={index}
+              total={total}
+              className="snap-start"
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Desktop: scroll-pinned horizontal scroller */}
+      <div ref={targetRef} className="hidden md:block h-[400vh] relative">
         <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
-          {/* Gradient orbs */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div className="gradient-orb gradient-orb-accent w-[400px] h-[400px] hidden sm:block -top-[150px] -right-[150px] absolute" />
-            <div className="gradient-orb gradient-orb-accent w-[400px] h-[400px] hidden sm:block -bottom-[150px] -left-[150px] absolute" />
+            <div className="gradient-orb gradient-orb-accent w-[400px] h-[400px] -top-[150px] -right-[150px] absolute" />
+            <div className="gradient-orb gradient-orb-accent w-[400px] h-[400px] -bottom-[150px] -left-[150px] absolute" />
           </div>
-          <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 w-full mt-10 sm:mt-0 mb-0 sm:mb-6">
+          <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 w-full mb-6">
             <SectionHeading label="My Career" title="Work Experience." />
           </div>
 
-          {/* Horizontally moving cards */}
           <motion.div
             ref={scrollContentRef}
             style={{ x }}

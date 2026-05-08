@@ -84,13 +84,22 @@ const Navbar = (): JSX.Element => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className={`w-full flex items-center py-4 fixed top-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'bg-primary/85 backdrop-blur-xs border-b border-(--divider)'
-          : 'bg-transparent border-b border-transparent'
-      }`}
+      className="fixed top-0 inset-x-0 z-50 flex justify-center pointer-events-none"
     >
-      <div className="w-full flex justify-between items-center max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+      <motion.div
+        layout
+        transition={{
+          layout: { duration: 0.85, ease: [0.16, 1, 0.3, 1] },
+        }}
+        className={`pointer-events-auto flex items-center justify-between transition-[background-color,border-color,box-shadow] duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          scrolled
+            ? 'w-full bg-primary/85 backdrop-blur-xs border-b border-(--divider) py-4 px-6 sm:px-8 lg:px-12 ' +
+              'md:w-auto md:max-w-[calc(100%-2rem)] md:mt-3 md:py-2 md:px-4 md:gap-8 ' +
+              'md:rounded-full md:bg-primary/75 md:backdrop-blur-lg md:border-b-transparent ' +
+              'md:shadow-[inset_0_0_0_1px_var(--divider),0_8px_32px_rgba(0,0,0,0.12)]'
+            : 'w-full max-w-6xl py-4 px-6 sm:px-8 lg:px-12 bg-transparent border-b border-transparent'
+        }`}
+      >
         <Link
           href="/"
           className="flex items-center gap-3"
@@ -138,9 +147,9 @@ const Navbar = (): JSX.Element => {
             <MenuIcon size={24} />
           </button>
         </div>
+      </motion.div>
 
-        {mounted && createPortal(mobileMenu, document.body)}
-      </div>
+      {mounted && createPortal(mobileMenu, document.body)}
     </motion.nav>
   );
 };
