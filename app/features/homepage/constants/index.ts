@@ -354,6 +354,21 @@ const projects = [
     link: 'https://elysantium.vercel.app',
   },
   {
+    name: 'Domavia',
+    description:
+      'A real estate listing platform for browsing and publishing properties for rent or sale. Find a house. Make it your home.',
+    tags: [
+      { name: 'Next.js', color: '' },
+      { name: 'Supabase', color: '' },
+      { name: 'Firebase Auth', color: '' },
+      { name: 'Tailwind', color: '' },
+      { name: 'Shadcn/ui', color: '' },
+    ],
+    image: '/images/projects/domavia.jpg',
+    source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
+    link: 'https://domavia.vercel.app',
+  },
+  {
     name: 'Blog.dev',
     description:
       'Personal development blog platform with admin authentication, CRUD operations, MongoDB persistence, and posts sorted by date with image support.',
