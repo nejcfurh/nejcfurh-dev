@@ -68,7 +68,7 @@ const AdditionalProjectCard = ({
         delay: index * 0.08,
         ease: [0.16, 1, 0.3, 1],
       }}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/15 bg-white/[0.04] sm:block sm:aspect-video sm:bg-transparent"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[var(--card-border)] bg-card-bg sm:block sm:aspect-video sm:border-white/15 sm:bg-transparent"
     >
       {/* Image — its own aspect-video block on mobile, fills the card on desktop */}
       <div className="relative aspect-video w-full overflow-hidden sm:absolute sm:inset-0 sm:aspect-auto sm:h-full">
@@ -85,13 +85,13 @@ const AdditionalProjectCard = ({
       </div>
 
       {/* Content — stacked below the image on mobile, overlaid at the bottom on desktop */}
-      <div className="flex flex-col p-5 text-white sm:absolute sm:inset-0 sm:justify-end">
+      <div className="flex flex-col p-5 text-white-100 sm:absolute sm:inset-0 sm:justify-end sm:text-white">
         <h3 className="text-lg font-bold">{project.name}</h3>
 
         {/* Description: always visible on mobile; hover-reveal on desktop */}
         <div className="sm:grid sm:grid-rows-[0fr] sm:transition-[grid-template-rows] sm:duration-300 sm:ease-out sm:group-hover:grid-rows-[1fr]">
           <div className="sm:overflow-hidden">
-            <p className="mt-2 text-sm leading-relaxed text-white/75 sm:line-clamp-3 sm:text-white/80">
+            <p className="mt-2 text-sm leading-relaxed text-secondary sm:line-clamp-3 sm:text-white/80">
               {project.description}
             </p>
           </div>
@@ -103,7 +103,7 @@ const AdditionalProjectCard = ({
             .map((tag: { name: string; color: string }) => (
               <span
                 key={tag.name}
-                className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium backdrop-blur-sm"
+                className="rounded-full border border-[var(--card-border)] bg-[var(--chip-bg)] px-3 py-1 text-xs font-medium backdrop-blur-sm sm:border-white/20 sm:bg-white/10"
                 style={tag.color ? { color: tag.color } : undefined}
               >
                 #{tag.name}
@@ -131,7 +131,7 @@ const AdditionalProjectCard = ({
                 href={project.source_code_link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full border border-white/30 px-3 py-1.5 text-xs font-semibold backdrop-blur-sm transition-colors hover:bg-white/10"
+                className="inline-flex items-center gap-1.5 rounded-full border border-[var(--outline-subtle)] px-3 py-1.5 text-xs font-semibold backdrop-blur-sm transition-colors hover:bg-[var(--chip-bg-hover)] sm:border-white/30 sm:hover:bg-white/10"
               >
                 <Github size={14} />
                 <span>Source</span>
@@ -141,7 +141,7 @@ const AdditionalProjectCard = ({
             {hasPreview && (
               <button
                 onClick={onPreview}
-                className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-white/30 px-3 py-1.5 text-xs font-semibold backdrop-blur-sm transition-colors hover:bg-white/10"
+                className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-[var(--outline-subtle)] px-3 py-1.5 text-xs font-semibold backdrop-blur-sm transition-colors hover:bg-[var(--chip-bg-hover)] sm:border-white/30 sm:hover:bg-white/10"
               >
                 <Eye size={14} />
                 <span>Preview</span>
