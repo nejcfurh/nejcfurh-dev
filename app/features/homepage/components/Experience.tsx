@@ -135,9 +135,14 @@ const Experience = (): JSX.Element => {
 
       {/* Desktop: scroll-pinned horizontal scroller */}
       <div ref={targetRef} className="hidden md:block h-[400vh] relative">
-        <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+        <div className="sticky top-0 h-screen flex flex-col justify-center overflow-x-clip">
+          {/* Top-right orb — clipped, so it can't bleed up over About's cards */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <div className="gradient-orb gradient-orb-accent w-[400px] h-[400px] -top-[150px] -right-[150px] absolute" />
+          </div>
+          {/* Bottom-left orb — sits below the cards, so it fades DOWN across the
+              Projects seam without ever covering Experience's own cards */}
+          <div className="absolute inset-0 pointer-events-none overflow-x-clip">
             <div className="gradient-orb gradient-orb-accent w-[400px] h-[400px] -bottom-[150px] -left-[150px] absolute" />
           </div>
           <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 w-full mb-6">

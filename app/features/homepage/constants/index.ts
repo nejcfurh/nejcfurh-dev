@@ -301,7 +301,7 @@ const projects = [
       { name: 'Next.js', color: '' },
       { name: 'Motion', color: '' },
       { name: 'Tailwind', color: '' },
-      { name: 'AI SDK', color: '' },
+      { name: 'AI_SDK', color: '' },
     ],
     image: '/images/projects/friends-of-nature.jpg',
     source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
@@ -381,7 +381,7 @@ const projects = [
     link: 'https://domavia.nejcfurh.dev',
   },
   {
-    name: 'Blog.dev',
+    name: 'Blog',
     description:
       'Personal development blog platform with admin authentication, CRUD operations, MongoDB persistence, and posts sorted by date with image support.',
     tags: [

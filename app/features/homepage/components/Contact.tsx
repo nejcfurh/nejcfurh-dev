@@ -100,7 +100,7 @@ const Contact = (): JSX.Element => {
   };
 
   return (
-    <section id="contact" className="relative py-32 overflow-hidden">
+    <section id="contact" className="relative py-32 overflow-x-clip">
       <div className="gradient-orb gradient-orb-accent w-[400px] h-[400px] hidden sm:block -top-[150px] -right-[150px] absolute" />
 
       <span className="hash-span">&nbsp;</span>

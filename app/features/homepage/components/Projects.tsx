@@ -1,103 +1,153 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
-import { JSX, lazy, Suspense, useCallback, useEffect, useState } from 'react';
+import { AnimatePresence, useScroll } from 'framer-motion';
+import {
+  JSX,
+  lazy,
+  Suspense,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { ExternalLink, Eye, Github, X } from 'lucide-react';
+import { ArrowUpRight, Eye, Github, X } from 'lucide-react';
 import SectionHeading from '@/app/components/SectionHeading';
+import AnimatedDiv from '@/app/components/motion/AnimatedDiv';
+import AnimatedText from '@/app/components/motion/AnimatedText';
 import { projects } from '../constants';
+import ProjectStackCard from './ProjectStackCard';
 
 const PersonalYearInReview = lazy(
   () => import('@/app/features/personal-year-in-review/page'),
 );
 
-interface ProjectCardProps {
-  project: (typeof projects)[0];
-  index: number;
-  onPreview?: () => void;
-}
+// How much each card shrinks per card stacked on top of it. Kept gentle so the
+// deepest card in a long list never collapses to an unreadable size.
+const SCALE_STEP = 0.035;
 
-const ProjectCard = ({
+// The projects shown as the large stacked cards (the rest fall into the grid
+// below). Order here is the order they stack in.
+const FEATURED_NAMES = [
+  'Design Lab',
+  'Twabblr',
+  'Backyard Skies',
+  'N-Drive',
+  'Birdbuddy WIKI',
+  'Birdbuddy Year in Birds',
+  'Seoul Beauty Club',
+  'Elysantium',
+];
+
+const featuredProjects = FEATURED_NAMES.map(name =>
+  projects.find(project => project.name === name),
+).filter((project): project is (typeof projects)[number] => Boolean(project));
+
+const additionalProjects = projects.filter(
+  project => !FEATURED_NAMES.includes(project.name),
+);
+
+const AdditionalProjectCard = ({
   project,
   index,
   onPreview,
-}: ProjectCardProps): JSX.Element => {
+}: {
+  project: (typeof projects)[number];
+  index: number;
+  onPreview?: () => void;
+}): JSX.Element => {
   const hasPreview = 'has_preview' in project && project.has_preview;
 
   return (
-    <motion.div
+    <AnimatedDiv
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{
         duration: 0.6,
-        delay: index * 0.1,
+        delay: index * 0.08,
         ease: [0.16, 1, 0.3, 1],
       }}
-      className="project-card glass-card overflow-hidden group"
+      className="group relative aspect-video overflow-hidden rounded-2xl border border-white/15"
     >
-      {/* Image */}
-      <div className="relative h-[180px] overflow-hidden">
-        <Image
-          src={project.image}
-          alt={project.name}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="project-card-image object-cover"
-        />
-        {/* Hover overlay */}
-        {(project.source_code_link || project.link || hasPreview) && (
-          <div className="project-card-overlay absolute inset-0 bg-primary/10 backdrop-blur-xs flex items-center justify-center gap-4">
-            {project.source_code_link && (
-              <Link
-                href={project.source_code_link}
-                target="_blank"
-                aria-label="GitHub"
-                rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-black/50 flex items-center justify-center hover:bg-black/75 transition-colors ease-out duration-300"
+      <Image
+        src={project.image}
+        alt={project.name}
+        fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+      />
+
+      {/* Dark scrim — same treatment as the featured stack cards */}
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/95 via-black/65 to-transparent" />
+
+      {/* Content overlaid at the bottom */}
+      <div className="absolute inset-0 flex flex-col justify-end p-5 text-white">
+        <h3 className="text-lg font-bold">{project.name}</h3>
+
+        {/* Description revealed on hover (grid-rows trick = no layout shift) */}
+        <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out group-hover:grid-rows-[1fr]">
+          <div className="overflow-hidden">
+            <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-white/80">
+              {project.description}
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-3 flex flex-wrap gap-2">
+          {project.tags
+            .slice(0, 4)
+            .map((tag: { name: string; color: string }) => (
+              <span
+                key={tag.name}
+                className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium backdrop-blur-sm"
+                style={tag.color ? { color: tag.color } : undefined}
               >
-                <Github size={20} className="text-white" />
-              </Link>
-            )}
+                #{tag.name}
+              </span>
+            ))}
+        </div>
+
+        {/* Actions — same pills as the featured cards, sized down */}
+        {(project.link || project.source_code_link || hasPreview) && (
+          <div className="mt-4 flex flex-wrap items-center gap-2">
             {project.link && (
-              <Link
+              <a
                 href={project.link}
                 target="_blank"
-                aria-label="Live Demo"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-black/50 flex items-center justify-center hover:bg-black/75 transition-colors ease-out duration-300"
+                className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-black transition-transform duration-300 ease-out hover:scale-105 active:scale-95"
               >
-                <ExternalLink size={20} className="text-white" />
-              </Link>
+                <span>Visit</span>
+                <ArrowUpRight size={14} />
+              </a>
             )}
+
+            {project.source_code_link && (
+              <a
+                href={project.source_code_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-white/30 px-3 py-1.5 text-xs font-semibold backdrop-blur-sm transition-colors hover:bg-white/10"
+              >
+                <Github size={14} />
+                <span>Source</span>
+              </a>
+            )}
+
             {hasPreview && (
               <button
                 onClick={onPreview}
-                className="w-12 h-12 rounded-full bg-black/50 flex items-center justify-center hover:bg-black/75 transition-colors ease-out duration-300 cursor-pointer"
+                className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-white/30 px-3 py-1.5 text-xs font-semibold backdrop-blur-sm transition-colors hover:bg-white/10"
               >
-                <Eye size={20} className="text-white" />
+                <Eye size={14} />
+                <span>Preview</span>
               </button>
             )}
           </div>
         )}
       </div>
-
-      {/* Content */}
-      <div className="p-6">
-        <h3 className="text-white-100 font-semibold text-lg">{project.name}</h3>
-        <p className="text-secondary text-sm mt-2 leading-relaxed line-clamp-5">
-          {project.description}
-        </p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {project.tags.map((tag: { name: string; color: string }) => (
-            <span key={tag.name} className="tag-pill">
-              {tag.name}
-            </span>
-          ))}
-        </div>
-      </div>
-    </motion.div>
+    </AnimatedDiv>
   );
 };
 
@@ -115,7 +165,7 @@ const IPhoneModal = ({ onClose }: { onClose: () => void }): JSX.Element => {
   }, [onClose]);
 
   return (
-    <motion.div
+    <AnimatedDiv
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -133,7 +183,7 @@ const IPhoneModal = ({ onClose }: { onClose: () => void }): JSX.Element => {
       </button>
 
       {/* iPhone frame */}
-      <motion.div
+      <AnimatedDiv
         initial={{ scale: 0.85, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.85, opacity: 0 }}
@@ -162,13 +212,19 @@ const IPhoneModal = ({ onClose }: { onClose: () => void }): JSX.Element => {
             </Suspense>
           </div>
         </div>
-      </motion.div>
-    </motion.div>
+      </AnimatedDiv>
+    </AnimatedDiv>
   );
 };
 
 const Projects = (): JSX.Element => {
   const [showPreview, setShowPreview] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end'],
+  });
 
   const handleOpenPreview = useCallback(() => {
     setShowPreview(true);
@@ -179,41 +235,75 @@ const Projects = (): JSX.Element => {
   }, []);
 
   return (
-    <section id="projects" className="relative py-32 overflow-hidden">
-      <div className="gradient-orb gradient-orb-accent w-[400px] h-[400px] hidden sm:block -top-[150px] -left-[150px] absolute" />
-      <div className="gradient-orb gradient-orb-accent w-[400px] h-[400px] hidden sm:block -bottom-[150px] -right-[150px] absolute" />
+    <section id="projects" className="relative">
+      <div className="absolute inset-0 pointer-events-none overflow-x-clip">
+        <div className="gradient-orb gradient-orb-accent w-[400px] h-[400px] hidden sm:block -bottom-[150px] -right-[150px] absolute" />
+      </div>
+
       <span className="hash-span">&nbsp;</span>
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+
+      {/* Intro */}
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 pt-32">
         <SectionHeading label="My Work" title="Projects." />
 
-        <motion.p
+        <AnimatedText
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-secondary max-w-2xl mb-16 leading-relaxed"
+          className="text-secondary max-w-2xl leading-relaxed"
         >
           A showcase of my latest web development creations. Each project
           includes links to GitHub repositories{' '}
           <span className="italic">(if not private)</span> and live demos
-          <span className="italic">(if available)</span>.
-        </motion.p>
+          <span className="italic">(if available)</span>. Scroll to watch them
+          stack into place.
+        </AnimatedText>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <ProjectCard
+      {/* Stacking cards (featured) */}
+      <div ref={containerRef} className="relative pb-0 sm:pb-[18vh]">
+        {featuredProjects.map((project, index) => {
+          const targetScale =
+            1 - (featuredProjects.length - index) * SCALE_STEP;
+
+          return (
+            <ProjectStackCard
               key={project.name}
               project={project}
               index={index}
+              range={[index * (1 / featuredProjects.length), 1]}
+              targetScale={targetScale}
+              progress={scrollYProgress}
               onPreview={
                 'has_preview' in project && project.has_preview
                   ? handleOpenPreview
                   : undefined
               }
             />
-          ))}
-        </div>
+          );
+        })}
       </div>
+
+      {/* Additional projects (grid) */}
+      {additionalProjects.length > 0 && (
+        <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 pb-32">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {additionalProjects.map((project, index) => (
+              <AdditionalProjectCard
+                key={project.name}
+                project={project}
+                index={index}
+                onPreview={
+                  'has_preview' in project && project.has_preview
+                    ? handleOpenPreview
+                    : undefined
+                }
+              />
+            ))}
+          </div>
+        </div>
+      )}
 
       <AnimatePresence>
         {showPreview && <IPhoneModal onClose={handleClosePreview} />}
