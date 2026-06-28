@@ -17,45 +17,27 @@ const slide = {
   }),
 };
 
-const scale = {
-  open: { scale: 1, transition: { duration: 0.3 } },
-  closed: { scale: 0, transition: { duration: 0.4 } },
-};
-
 interface MobileNavLinkProps {
   data: {
     title: string;
     id: string;
     index: number;
   };
-  isActive: boolean;
-  setSelectedIndicator: (id: string) => void;
   onNavigate: () => void;
 }
 
-const MobileNavLink = ({
-  data,
-  isActive,
-  setSelectedIndicator,
-  onNavigate,
-}: MobileNavLinkProps): JSX.Element => {
+const MobileNavLink = ({ data, onNavigate }: MobileNavLinkProps): JSX.Element => {
   const { title, id, index } = data;
 
   return (
     <AnimatedDiv
       className="relative flex shrink-0 items-center leading-none"
-      onMouseEnter={() => setSelectedIndicator(id)}
       custom={index}
       variants={slide}
       initial="initial"
       animate="enter"
       exit="exit"
     >
-      <AnimatedDiv
-        variants={scale}
-        animate={isActive ? 'open' : 'closed'}
-        className="absolute -left-[1.5em] size-[0.2em] min-h-2 min-w-2 rounded-full bg-(--accent)"
-      />
       <a
         href={`#${id}`}
         onClick={onNavigate}

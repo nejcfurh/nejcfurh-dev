@@ -117,7 +117,7 @@ const Experience = (): JSX.Element => {
     <section id="experience" className="relative">
       {/* Mobile: native horizontal swipe, no boxed container */}
       <div className="md:hidden">
-        <div className="max-w-6xl mx-auto px-6 w-full pt-16 pb-8">
+        <div className="max-w-6xl mx-auto px-6 w-full pt-24 sm:pt-16 pb-8">
           <SectionHeading label="My Career" title="Work Experience." />
         </div>
         <div className="flex items-stretch gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-6 px-6 pb-16 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">

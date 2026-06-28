@@ -68,27 +68,30 @@ const AdditionalProjectCard = ({
         delay: index * 0.08,
         ease: [0.16, 1, 0.3, 1],
       }}
-      className="group relative aspect-video overflow-hidden rounded-2xl border border-white/15"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/15 bg-white/[0.04] sm:block sm:aspect-video sm:bg-transparent"
     >
-      <Image
-        src={project.image}
-        alt={project.name}
-        fill
-        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-      />
+      {/* Image — its own aspect-video block on mobile, fills the card on desktop */}
+      <div className="relative aspect-video w-full overflow-hidden sm:absolute sm:inset-0 sm:aspect-auto sm:h-full">
+        <Image
+          src={project.image}
+          alt={project.name}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition duration-500 ease-out group-hover:scale-105 sm:group-hover:blur-sm"
+        />
 
-      {/* Dark scrim — same treatment as the featured stack cards */}
-      <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/95 via-black/65 to-transparent" />
+        {/* Dark scrim — overlay treatment only matters on desktop */}
+        <div className="pointer-events-none absolute inset-0 hidden bg-linear-to-t from-black/95 via-black/65 to-transparent sm:block" />
+      </div>
 
-      {/* Content overlaid at the bottom */}
-      <div className="absolute inset-0 flex flex-col justify-end p-5 text-white">
+      {/* Content — stacked below the image on mobile, overlaid at the bottom on desktop */}
+      <div className="flex flex-col p-5 text-white sm:absolute sm:inset-0 sm:justify-end">
         <h3 className="text-lg font-bold">{project.name}</h3>
 
-        {/* Description revealed on hover (grid-rows trick = no layout shift) */}
-        <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out group-hover:grid-rows-[1fr]">
-          <div className="overflow-hidden">
-            <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-white/80">
+        {/* Description: always visible on mobile; hover-reveal on desktop */}
+        <div className="sm:grid sm:grid-rows-[0fr] sm:transition-[grid-template-rows] sm:duration-300 sm:ease-out sm:group-hover:grid-rows-[1fr]">
+          <div className="sm:overflow-hidden">
+            <p className="mt-2 text-sm leading-relaxed text-white/75 sm:line-clamp-3 sm:text-white/80">
               {project.description}
             </p>
           </div>

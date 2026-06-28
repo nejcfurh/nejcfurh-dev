@@ -70,7 +70,7 @@ const MobileMenuCurve = (): JSX.Element | null => {
         fill="none"
         className="stroke-(--accent)"
         strokeWidth={2}
-        strokeOpacity={0.6}
+        strokeOpacity={0.3}
         vectorEffect="non-scaling-stroke"
       />
     </svg>

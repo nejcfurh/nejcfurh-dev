@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { X } from 'lucide-react';
-import { JSX, useState } from 'react';
+import { JSX } from 'react';
 import Logo from '@/app/components/Logo';
 import AnimatedDiv from '@/app/components/motion/AnimatedDiv';
 import { navLinks } from '../constants';
@@ -23,8 +23,6 @@ interface MobileMenuProps {
 }
 
 const MobileMenu = ({ onClose }: MobileMenuProps): JSX.Element => {
-  const [selectedIndicator, setSelectedIndicator] = useState('');
-
   return (
     <AnimatedDiv
       variants={menuSlide}
@@ -42,10 +40,7 @@ const MobileMenu = ({ onClose }: MobileMenuProps): JSX.Element => {
       </button>
 
       <div className="box-border flex h-full flex-col px-8 py-24">
-        <div
-          onMouseLeave={() => setSelectedIndicator('')}
-          className="flex min-h-0 flex-1 flex-col items-center gap-3 text-center"
-        >
+        <div className="flex min-h-0 flex-1 flex-col items-center gap-3 text-center">
           {/* Logo replaces the "Navigation" label */}
           <div className="flex shrink-0 justify-center">
             <Link
@@ -71,8 +66,6 @@ const MobileMenu = ({ onClose }: MobileMenuProps): JSX.Element => {
               <MobileNavLink
                 key={link.id}
                 data={{ title: link.title, id: link.id, index }}
-                isActive={selectedIndicator === link.id}
-                setSelectedIndicator={setSelectedIndicator}
                 onNavigate={onClose}
               />
             ))}
