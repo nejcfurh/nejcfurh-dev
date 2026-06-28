@@ -24,13 +24,6 @@ import advisera from './images/experience/advisera.png';
 import birdbuddy from './images/experience/birdbuddy.png';
 import mzez from './images/experience/mzez.png';
 
-// PROJECTS
-import todocards from './images/projects/todocards.png';
-import blogdev from './images/projects/devblog.png';
-import workease from './images/projects/workease.png';
-import friendsOfNature from './images/projects/friendsofnature.png';
-import petal from './images/projects/petal.png';
-
 export {
   logo,
   logoAlt,
@@ -52,9 +45,4 @@ export {
   advisera,
   mzez,
   birdbuddy,
-  todocards,
-  blogdev,
-  workease,
-  friendsOfNature,
-  petal,
 };
