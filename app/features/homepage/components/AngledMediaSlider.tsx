@@ -43,6 +43,14 @@ const AngledMediaSlider = () => {
     return () => mql.removeEventListener('change', handler);
   }, []);
 
+  // iOS Safari occasionally ignores the `loop` attribute on autoplaying
+  // muted videos and pauses on the last frame; force a restart as a fallback.
+  const handleEnded = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+    const video = e.currentTarget;
+    video.currentTime = 0;
+    video.play().catch(() => {});
+  };
+
   if (isMobile) {
     return (
       <ul className="m-0 flex flex-col gap-3 list-none p-0">
@@ -54,6 +62,7 @@ const AngledMediaSlider = () => {
               autoPlay
               loop
               playsInline
+              onEnded={handleEnded}
               src={item.video}
             />
           </li>
@@ -85,6 +94,7 @@ const AngledMediaSlider = () => {
                   autoPlay
                   loop
                   playsInline
+                  onEnded={handleEnded}
                   src={item.video}
                 />
               </div>
