@@ -5,9 +5,10 @@ import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { navLinks } from '../constants';
 import Logo from '@/app/components/Logo';
-import { MenuIcon, X } from 'lucide-react';
+import { MenuIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from '@/app/components/theme/ThemeToggle';
+import MobileMenu from './MobileMenu';
 
 const Navbar = (): JSX.Element => {
   const [active, setActive] = useState('');
@@ -25,56 +26,28 @@ const Navbar = (): JSX.Element => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = toggle ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [toggle]);
+
   const mobileMenu = (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {toggle && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2, ease: 'easeOut' }}
-          className="fixed inset-0 min-h-dvh w-full bg-primary/85 backdrop-blur-sm z-100 flex flex-col items-center justify-center pt-20 pb-12"
-        >
-          <button
-            className="absolute top-3 right-4 w-10 h-10 flex items-center justify-center cursor-pointer text-white-100 rounded-full hover:bg-(--chip-bg-hover) transition-colors"
+        <>
+          {/* Backdrop — dims the sliver of page left of the panel */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
             onClick={() => setToggle(false)}
-            aria-label="Close menu"
-          >
-            <X size={24} />
-          </button>
-          <nav>
-            <ul className="list-none flex flex-col items-center gap-12">
-              {navLinks.map((link, i) => (
-                <motion.li
-                  key={link.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  transition={{
-                    delay: 0.02 + i * 0.05,
-                    duration: 0.25,
-                    ease: 'easeOut',
-                  }}
-                >
-                  <a
-                    href={`#${link.id}`}
-                    className={`text-4xl font-light transition-colors duration-300 ${
-                      active === link.title
-                        ? 'text-white-100'
-                        : 'text-secondary hover:text-white-100'
-                    }`}
-                    onClick={() => {
-                      setActive(link.title);
-                      setToggle(false);
-                    }}
-                  >
-                    {link.title}
-                  </a>
-                </motion.li>
-              ))}
-            </ul>
-          </nav>
-        </motion.div>
+            className="fixed inset-0 z-100 bg-black/50 backdrop-blur-sm md:hidden"
+          />
+          <MobileMenu onClose={() => setToggle(false)} />
+        </>
       )}
     </AnimatePresence>
   );
