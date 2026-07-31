@@ -10,8 +10,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from '@/app/components/theme/ThemeToggle';
 import MobileMenu from './MobileMenu';
 
+// A section counts as current once it crosses the line just under the bar, not
+// when it first appears at the bottom of the viewport.
+const ACTIVE_PROBE_OFFSET = 120;
+
 const Navbar = (): JSX.Element => {
-  const [active, setActive] = useState('');
+  const [activeId, setActiveId] = useState('');
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -21,9 +25,37 @@ const Navbar = (): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      setScrolled(window.scrollY > 50);
+
+      // Last section past the probe wins, so navLinks must stay in document order.
+      const probe = window.scrollY + ACTIVE_PROBE_OFFSET;
+      let current = '';
+      for (const link of navLinks) {
+        const section = document.getElementById(link.id);
+        if (!section) continue;
+        if (section.getBoundingClientRect().top + window.scrollY <= probe) {
+          current = link.id;
+        }
+      }
+      setActiveId(current);
+    };
+
+    const handleScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -77,7 +109,7 @@ const Navbar = (): JSX.Element => {
           href="/"
           className="flex items-center gap-3"
           onClick={() => {
-            setActive('');
+            setActiveId('');
             window.scrollTo(0, 0);
           }}
         >
@@ -92,12 +124,12 @@ const Navbar = (): JSX.Element => {
                 <li key={link.id}>
                   <a
                     href={`#${link.id}`}
-                    onClick={() => setActive(link.title)}
+                    onClick={() => setActiveId(link.id)}
                     className={
                       isContact
                         ? 'inline-block bg-(--accent) text-white rounded-full py-1.5 px-4 text-sm font-medium transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-[0_0_25px_var(--accent-glow)]'
                         : `text-sm transition-colors duration-300 ${
-                            active === link.title
+                            activeId === link.id
                               ? 'text-white-100'
                               : 'text-secondary hover:text-white-100'
                           }`

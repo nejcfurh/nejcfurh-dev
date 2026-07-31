@@ -68,13 +68,17 @@ const ProjectStackCard = ({
 
   return (
     // CARD CONTAINER
+    // Each container is a full-viewport sticky box, so the ones further down the
+    // stack sit on top of the cards already parked above them. Left clickable it
+    // swallows the previous card's links through its empty area — hit-testing
+    // only reaches the cards themselves.
     <div
       ref={containerRef}
-      className="sticky top-0 mx-auto flex h-screen justify-center"
+      className="pointer-events-none sticky top-0 mx-auto flex h-screen justify-center"
     >
       {/* CARD */}
       <AnimatedDiv
-        className="relative mt-[30vh] sm:mt-[23vh] h-[340px] w-[1000px] max-w-[90vw] origin-top overflow-hidden rounded-2xl border-2 border-white/60 sm:h-[510px]"
+        className="pointer-events-auto relative mt-[30vh] sm:mt-[23vh] h-[340px] w-[1000px] max-w-[90vw] origin-top overflow-hidden rounded-2xl border-2 border-white/60 sm:h-[510px]"
         style={{ top: `calc(-10% + ${index * 25}px)`, scale: cardScale }}
       >
         <AnimatedImage

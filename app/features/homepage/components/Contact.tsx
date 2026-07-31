@@ -4,7 +4,7 @@ import emailjs from '@emailjs/browser';
 import { JSX, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
-import { Send, Download } from 'lucide-react';
+import { Send, Download, Github } from 'lucide-react';
 import SectionHeading from '@/app/components/SectionHeading';
 
 const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
@@ -93,7 +93,7 @@ const Contact = (): JSX.Element => {
           toast.error('Something went wrong. Please try again.', {
             duration: 1500,
             style: toastStyle,
-            iconTheme: { primary: '#ef4444', secondary: '#fafafa' },
+            iconTheme: { primary: 'rgb(239, 68, 68)', secondary: '#fafafa' },
           });
         },
       );
@@ -101,7 +101,7 @@ const Contact = (): JSX.Element => {
 
   return (
     <section id="contact" className="relative py-32 overflow-x-clip">
-      <div className="gradient-orb gradient-orb-accent w-[400px] h-[400px] hidden sm:block -top-[150px] -right-[150px] absolute" />
+      <div className="gradient-orb gradient-orb-accent w-100 h-100 hidden sm:block -top-37.5 -right-37.5 absolute" />
 
       <span className="hash-span">&nbsp;</span>
 
@@ -140,6 +140,19 @@ const Contact = (): JSX.Element => {
                 </div>
                 <span className="text-secondary text-sm group-hover:text-white-100 transition-colors">
                   Download CV
+                </span>
+              </a>
+              <a
+                href="https://github.com/nejcfurh/nejcfurh-claude"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 group"
+              >
+                <div className="w-10 h-10 rounded-xl bg-(--chip-bg) flex items-center justify-center group-hover:bg-(--chip-bg-hover) transition-colors">
+                  <Github size={16} className="text-accent" />
+                </div>
+                <span className="text-secondary text-sm group-hover:text-white-100 transition-colors">
+                  Personal Claude Code Config (nejcfurh-claude)
                 </span>
               </a>
             </div>
