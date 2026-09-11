@@ -85,6 +85,18 @@ export const ThemeProvider = ({
         Math.max(origin.y, window.innerHeight - origin.y),
       );
 
+      // Percentages, not px: the reveal is clipped against the view-transition
+      // snapshot's own box, and a browser that sizes that box in device pixels
+      // puts an absolute origin at 1/dpr of the intended spot. Percentages
+      // resolve against whichever box is in play.
+      const centerX = (origin.x / window.innerWidth) * 100;
+      const centerY = (origin.y / window.innerHeight) * 100;
+      // A percentage radius resolves against sqrt(w² + h²) / sqrt(2).
+      const radius =
+        (endRadius /
+          (Math.hypot(window.innerWidth, window.innerHeight) / Math.SQRT2)) *
+        100;
+
       const transition = doc.startViewTransition(() => {
         flushSync(() => {
           setTheme(next);
@@ -97,8 +109,8 @@ export const ThemeProvider = ({
           document.documentElement.animate(
             {
               clipPath: [
-                `circle(0px at ${origin.x}px ${origin.y}px)`,
-                `circle(${endRadius}px at ${origin.x}px ${origin.y}px)`,
+                `circle(0% at ${centerX}% ${centerY}%)`,
+                `circle(${radius}% at ${centerX}% ${centerY}%)`,
               ],
             },
             {
