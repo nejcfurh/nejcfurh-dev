@@ -4,6 +4,8 @@ import { Geist, Geist_Mono, Inter } from 'next/font/google';
 import './globals.css';
 import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from './components/theme/ThemeProvider';
+import { PostHogProvider } from './analytics/PostHogProvider';
+import { posthogConfig } from './config/app.config';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -52,10 +54,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${awesomeSerif.variable} ${inter.variable} font-sans antialiased bg-primary text-white-100`}
       >
-        <ThemeProvider>
-          <Toaster />
-          {children}
-        </ThemeProvider>
+        <PostHogProvider config={posthogConfig}>
+          <ThemeProvider>
+            <Toaster />
+            {children}
+          </ThemeProvider>
+        </PostHogProvider>
       </body>
     </html>
   );
