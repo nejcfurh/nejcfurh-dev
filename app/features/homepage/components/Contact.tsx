@@ -106,16 +106,15 @@ const Contact = (): JSX.Element => {
       <span className="hash-span">&nbsp;</span>
 
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
-        <SectionHeading label="Get in Touch" title="Contact." />
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Left - info */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:items-center gap-12">
+          {/* Left - heading + info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
+            <SectionHeading label="Get in Touch" title="Contact." />
             <p className="text-secondary leading-relaxed mb-8 max-w-md">
               Have a project in mind or want to collaborate? I&apos;d love to
               hear from you. Drop me a message and I&apos;ll get back to you as
