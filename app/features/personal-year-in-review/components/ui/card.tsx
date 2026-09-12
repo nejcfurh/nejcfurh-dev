@@ -1,10 +1,6 @@
 import * as React from 'react';
 import clsx from 'clsx';
 
-/* eslint-disable jsx-a11y/heading-has-content */
-
-/* eslint-disable react/prop-types */
-
 const Card = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>

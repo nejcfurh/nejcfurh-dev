@@ -3,7 +3,7 @@ import AnimatedText from '@/app/components/motion/AnimatedText';
 import AnimatedTitle from '@/app/components/motion/AnimatedTitle';
 import Image from 'next/image';
 import type React from 'react';
-import { useEffect, useState } from 'react';
+import { useIsMounted } from '@/app/hooks/useIsMounted';
 
 // CLOUD IMAGES
 import cloudsImage from '@/public/images/projects/personal-year-in-review/clouds/clouds-1.png';
@@ -19,11 +19,7 @@ import backgroundImage from '@/public/images/projects/personal-year-in-review/sl
 import GuideComponent from './GuideComponent';
 
 const HeroSlide = (): React.ReactNode => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const isMounted = useIsMounted();
 
   return (
     isMounted && (

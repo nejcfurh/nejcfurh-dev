@@ -74,7 +74,6 @@ const ShareButton = ({
   const [isClosing, setIsClosing] = useState(false);
   const [slideImageUrl, setSlideImageUrl] = useState<string | null>(null);
   const [slideImageBlob, setSlideImageBlob] = useState<Blob | null>(null);
-  const [externalMediaUrls, setExternalMediaUrls] = useState<string[]>([]);
   const y = useMotionValue(0);
   const opacity = useTransform(y, [0, 150], [1, 0.3]);
   const hasGeneratedRef = useRef(false);
@@ -127,25 +126,22 @@ const ShareButton = ({
   }, [slideComponent, slideProps, slideKey, generateImage, logoColor]);
 
   // CREATE PREVIEW URLS FOR EXTERNAL SHARE MEDIA (FINAL SLIDE WITH MULTIPLE IMAGES)
-  useEffect(() => {
-    if (
-      externalShareMedia &&
-      externalShareMedia.length > 0 &&
-      !slideImageBlob
-    ) {
-      const urls = externalShareMedia
-        .filter((media) => media.type === 'image')
-        .map((media) => URL.createObjectURL(media.blob));
-
-      setExternalMediaUrls(urls);
-
-      return () => {
-        urls.forEach((url) => URL.revokeObjectURL(url));
-      };
-    } else {
-      setExternalMediaUrls([]);
+  const externalMediaUrls = useMemo((): string[] => {
+    if (!externalShareMedia || externalShareMedia.length === 0 || slideImageBlob) {
+      return [];
     }
+
+    return externalShareMedia
+      .filter((media) => media.type === 'image')
+      .map((media) => URL.createObjectURL(media.blob));
   }, [externalShareMedia, slideImageBlob]);
+
+  // Revoke the previous batch once a new one replaces it, and on unmount.
+  useEffect(() => {
+    return () => {
+      externalMediaUrls.forEach((url) => URL.revokeObjectURL(url));
+    };
+  }, [externalMediaUrls]);
 
   // CLEAN UP THE URL OBJECT ON UNMOUNT
   useEffect(() => {

@@ -6,8 +6,6 @@ import React, { useEffect, useState } from 'react';
 
 import type { YearInReviewNamedBirdStats } from '../types/types';
 
-/* eslint-disable react/jsx-max-depth */
-
 const TopNamedBirdCardSlide = ({
   topNamedBird
 }: {

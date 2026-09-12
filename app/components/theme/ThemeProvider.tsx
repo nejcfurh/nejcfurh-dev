@@ -1,13 +1,8 @@
 'use client';
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, useCallback, useContext, useState } from 'react';
 import { flushSync } from 'react-dom';
+import { useIsMounted } from '@/app/hooks/useIsMounted';
 
 export type Theme = 'dark' | 'light';
 
@@ -47,11 +42,12 @@ export const ThemeProvider = ({
 }: {
   children: React.ReactNode;
 }): React.ReactElement => {
-  const [theme, setTheme] = useState<Theme>('dark');
-
-  useEffect(() => {
-    setTheme(readInitialTheme());
-  }, []);
+  const isMounted = useIsMounted();
+  // Until hydration finishes the persisted theme is unreadable without risking a
+  // mismatch, so the server's 'dark' stands in; the toggle takes over from there.
+  const [toggledTheme, setToggledTheme] = useState<Theme | null>(null);
+  const theme: Theme =
+    toggledTheme ?? (isMounted ? readInitialTheme() : 'dark');
 
   const toggleTheme = useCallback(
     (event?: React.MouseEvent<HTMLElement>) => {
@@ -63,7 +59,7 @@ export const ThemeProvider = ({
       ).matches;
 
       if (!doc.startViewTransition || prefersReducedMotion) {
-        setTheme(next);
+        setToggledTheme(next);
         applyTheme(next);
         return;
       }
@@ -99,7 +95,7 @@ export const ThemeProvider = ({
 
       const transition = doc.startViewTransition(() => {
         flushSync(() => {
-          setTheme(next);
+          setToggledTheme(next);
           applyTheme(next);
         });
       });
