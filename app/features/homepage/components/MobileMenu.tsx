@@ -54,6 +54,9 @@ const MobileMenu = ({ onClose }: MobileMenuProps): JSX.Element => {
               onClick={() => {
                 trackButtonTap(ButtonNameType.MOBILE_MENU_LOGO);
                 onClose();
+                // Same as the desktop logo: navigating to "/" from "/" is a no-op,
+                // so the scroll has to be explicit.
+                window.scrollTo(0, 0);
               }}
               aria-label="Home"
               className="inline-flex"
