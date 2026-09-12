@@ -1,6 +1,7 @@
 'use client';
 
 import { JSX, useState, useEffect } from 'react';
+import { useIsMounted } from '@/app/hooks/useIsMounted';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { navLinks } from '../constants';
@@ -18,11 +19,7 @@ const Navbar = (): JSX.Element => {
   const [activeId, setActiveId] = useState('');
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useIsMounted();
 
   useEffect(() => {
     let frame = 0;

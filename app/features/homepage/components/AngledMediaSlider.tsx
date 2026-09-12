@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { droneShotVideos } from '../constants';
+import { useMediaQuery } from '@/app/hooks/useMediaQuery';
 
 const computeClip = (
   idx: number,
@@ -30,18 +31,10 @@ const computeClip = (
 
 const AngledMediaSlider = () => {
   const [hovered, setHovered] = useState<number | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const split = 50;
   const count = droneShotVideos.length;
   const pps = 100 / count;
-
-  useEffect(() => {
-    const mql = window.matchMedia('(max-width: 768px)');
-    setIsMobile(mql.matches);
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mql.addEventListener('change', handler);
-    return () => mql.removeEventListener('change', handler);
-  }, []);
 
   // iOS Safari occasionally ignores the `loop` attribute on autoplaying
   // muted videos and pauses on the last frame; force a restart as a fallback.

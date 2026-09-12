@@ -2,14 +2,10 @@ import AnimatedDiv from '@/app/components/motion/AnimatedDiv';
 import AnimatedText from '@/app/components/motion/AnimatedText';
 import AnimatedTitle from '@/app/components/motion/AnimatedTitle';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useIsMounted } from '@/app/hooks/useIsMounted';
 
 const HeroSlide = (): React.ReactNode => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const isMounted = useIsMounted();
 
   return (
     isMounted && (
