@@ -12,5 +12,7 @@ export const useMount = (callback: EffectCallback): void => {
 
       return callback();
     }
+    // The empty dependency list is the point of this hook: it must run once, on mount only.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
