@@ -11,11 +11,13 @@ import Footer from "./features/homepage/components/Footer";
 import ScrollProgress from "./components/ScrollProgress";
 import GrainOverlay from "./components/GrainOverlay";
 import { ReactLenis } from "lenis/react";
+import { PageVisitTracker } from "./analytics/PageVisitTracker";
 
 export default function Home(): JSX.Element {
   return (
     <ReactLenis root options={{ lerp: 0.05 }}>
       <main className="relative bg-primary">
+        <PageVisitTracker pageEvent={{ pageName: "Home" }} />
         <GrainOverlay />
         <ScrollProgress />
         <Navbar />
