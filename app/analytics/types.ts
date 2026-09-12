@@ -1,3 +1,7 @@
+import type {
+  AnalyticsClientEventType,
+  ButtonNameType,
+} from './constants';
 import type { PostHogClientSession } from './posthog.client';
 
 export enum AppEnvironment {
@@ -27,7 +31,17 @@ export interface AnalyticsClientPageEvent {
   properties?: Record<string, unknown>;
 }
 
-export interface AnalyticsClientEventProperties {
-  eventName: string;
-  properties?: Record<string, unknown>;
+export interface ButtonTapProperties {
+  ButtonName: ButtonNameType;
+  // Set only where one button name covers several targets, so the event still
+  // says which project or social network was tapped.
+  ProjectName?: string;
+  SocialName?: string;
 }
+
+export interface ButtonTapEvent {
+  eventName: AnalyticsClientEventType.BUTTON_TAP;
+  properties: ButtonTapProperties;
+}
+
+export type AnalyticsClientEvent = ButtonTapEvent;

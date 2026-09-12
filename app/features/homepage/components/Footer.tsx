@@ -1,5 +1,7 @@
 'use client';
 
+import { ButtonNameType } from '@/app/analytics/constants';
+import { useButtonTap } from '@/app/analytics/useButtonTap';
 import { JSX } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -7,6 +9,7 @@ import { ArrowUp } from 'lucide-react';
 import { socialLinks } from '../constants/socialLinks';
 
 const Footer = (): JSX.Element => {
+  const trackButtonTap = useButtonTap();
   return (
     <footer className="relative border-t border-(--divider) py-12">
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
@@ -30,6 +33,11 @@ const Footer = (): JSX.Element => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
+                onClick={() =>
+                  trackButtonTap(ButtonNameType.FOOTER_SOCIAL_LINK, {
+                    SocialName: social.name,
+                  })
+                }
                 className={`w-11 h-11 rounded-full outline outline-(--outline-subtle) bg-transparent grid place-items-center text-white-100 cursor-pointer transition-all duration-300 hover:outline-offset-[3px] ${social.hoverClass}`}
               >
                 {social.icon}
@@ -38,7 +46,10 @@ const Footer = (): JSX.Element => {
 
             {/* Scroll to top */}
             <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={() => {
+                trackButtonTap(ButtonNameType.FOOTER_SCROLL_TOP);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               className="w-11 h-11 rounded-full outline outline-(--outline-subtle) bg-transparent grid place-items-center text-white-100 cursor-pointer transition-all duration-300 hover:outline-offset-[3px] hover:bg-accent ml-2"
               aria-label="Scroll to top"
             >

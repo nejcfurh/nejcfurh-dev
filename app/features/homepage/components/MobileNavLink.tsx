@@ -2,6 +2,8 @@
 
 import { JSX } from 'react';
 import AnimatedDiv from '@/app/components/motion/AnimatedDiv';
+import { useButtonTap } from '@/app/analytics/useButtonTap';
+import { MOBILE_MENU_BUTTON_NAME_BY_SECTION } from '../constants/analytics';
 
 const EASE = [0.76, 0, 0.24, 1] as const;
 
@@ -28,6 +30,7 @@ interface MobileNavLinkProps {
 
 const MobileNavLink = ({ data, onNavigate }: MobileNavLinkProps): JSX.Element => {
   const { title, id, index } = data;
+  const trackButtonTap = useButtonTap();
 
   return (
     <AnimatedDiv
@@ -40,7 +43,10 @@ const MobileNavLink = ({ data, onNavigate }: MobileNavLinkProps): JSX.Element =>
     >
       <a
         href={`#${id}`}
-        onClick={onNavigate}
+        onClick={() => {
+          trackButtonTap(MOBILE_MENU_BUTTON_NAME_BY_SECTION[id]);
+          onNavigate();
+        }}
         className="font-light text-white-100 no-underline"
       >
         {title}

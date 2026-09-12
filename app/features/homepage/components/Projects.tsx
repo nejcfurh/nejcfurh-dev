@@ -1,5 +1,7 @@
 'use client';
 
+import { ButtonNameType } from '@/app/analytics/constants';
+import { useButtonTap } from '@/app/analytics/useButtonTap';
 import { AnimatePresence, useScroll } from 'framer-motion';
 import {
   JSX,
@@ -56,6 +58,7 @@ const AdditionalProjectCard = ({
   index: number;
   onPreview?: () => void;
 }): JSX.Element => {
+  const trackButtonTap = useButtonTap();
   const hasPreview = 'has_preview' in project && project.has_preview;
 
   return (
@@ -119,6 +122,11 @@ const AdditionalProjectCard = ({
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackButtonTap(ButtonNameType.PROJECT_VISIT, {
+                    ProjectName: project.name,
+                  })
+                }
                 className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-black transition-transform duration-300 ease-out hover:scale-105 active:scale-95"
               >
                 <span>Visit</span>
@@ -131,6 +139,11 @@ const AdditionalProjectCard = ({
                 href={project.source_code_link}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackButtonTap(ButtonNameType.PROJECT_SOURCE, {
+                    ProjectName: project.name,
+                  })
+                }
                 className="inline-flex items-center gap-1.5 rounded-full border border-[var(--outline-subtle)] px-3 py-1.5 text-xs font-semibold backdrop-blur-sm transition-colors hover:bg-[var(--chip-bg-hover)] sm:border-white/30 sm:hover:bg-white/10"
               >
                 <Github size={14} />
@@ -140,7 +153,12 @@ const AdditionalProjectCard = ({
 
             {hasPreview && (
               <button
-                onClick={onPreview}
+                onClick={() => {
+                  trackButtonTap(ButtonNameType.PROJECT_PREVIEW, {
+                    ProjectName: project.name,
+                  });
+                  onPreview?.();
+                }}
                 className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-[var(--outline-subtle)] px-3 py-1.5 text-xs font-semibold backdrop-blur-sm transition-colors hover:bg-[var(--chip-bg-hover)] sm:border-white/30 sm:hover:bg-white/10"
               >
                 <Eye size={14} />
@@ -155,6 +173,7 @@ const AdditionalProjectCard = ({
 };
 
 const IPhoneModal = ({ onClose }: { onClose: () => void }): JSX.Element => {
+  const trackButtonTap = useButtonTap();
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -174,11 +193,21 @@ const IPhoneModal = ({ onClose }: { onClose: () => void }): JSX.Element => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
       className="fixed inset-0 z-9999 flex items-center justify-center bg-black/70 backdrop-blur-sm"
-      onClick={onClose}
+      onClick={event => {
+        // The close button sits inside this overlay, so only count a tap that
+        // landed on the backdrop itself.
+        if (event.target === event.currentTarget) {
+          trackButtonTap(ButtonNameType.PROJECT_PREVIEW_BACKDROP);
+        }
+        onClose();
+      }}
     >
       {/* Close button */}
       <button
-        onClick={onClose}
+        onClick={() => {
+          trackButtonTap(ButtonNameType.PROJECT_PREVIEW_CLOSE);
+          onClose();
+        }}
         className="absolute top-6 right-6 z-10 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
         aria-label="Close preview"
       >

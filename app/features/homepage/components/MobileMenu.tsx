@@ -9,6 +9,8 @@ import { navLinks } from '../constants';
 import { socialLinks } from '../constants/socialLinks';
 import MobileMenuCurve from './MobileMenuCurve';
 import MobileNavLink from './MobileNavLink';
+import { ButtonNameType } from '@/app/analytics/constants';
+import { useButtonTap } from '@/app/analytics/useButtonTap';
 
 const EASE = [0.76, 0, 0.24, 1] as const;
 
@@ -23,6 +25,7 @@ interface MobileMenuProps {
 }
 
 const MobileMenu = ({ onClose }: MobileMenuProps): JSX.Element => {
+  const trackButtonTap = useButtonTap();
   return (
     <AnimatedDiv
       variants={menuSlide}
@@ -32,7 +35,10 @@ const MobileMenu = ({ onClose }: MobileMenuProps): JSX.Element => {
       className="fixed top-0 right-0 z-150 h-dvh w-full overflow-visible bg-primary text-white-100 md:hidden"
     >
       <button
-        onClick={onClose}
+        onClick={() => {
+          trackButtonTap(ButtonNameType.MOBILE_MENU_CLOSE);
+          onClose();
+        }}
         aria-label="Close menu"
         className="absolute top-4 right-4 z-10 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-white-100 transition-colors hover:bg-(--chip-bg-hover)"
       >
@@ -45,7 +51,10 @@ const MobileMenu = ({ onClose }: MobileMenuProps): JSX.Element => {
           <div className="flex shrink-0 justify-center">
             <Link
               href="/"
-              onClick={onClose}
+              onClick={() => {
+                trackButtonTap(ButtonNameType.MOBILE_MENU_LOGO);
+                onClose();
+              }}
               aria-label="Home"
               className="inline-flex"
             >
@@ -82,6 +91,11 @@ const MobileMenu = ({ onClose }: MobileMenuProps): JSX.Element => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
+                onClick={() =>
+                  trackButtonTap(ButtonNameType.MOBILE_MENU_SOCIAL_LINK, {
+                    SocialName: social.name,
+                  })
+                }
                 className={`grid h-10 w-10 cursor-pointer place-items-center rounded-full bg-transparent text-white-100 outline outline-(--outline-subtle) transition-all duration-300 hover:outline-offset-[3px] ${social.hoverClass}`}
               >
                 {social.icon}

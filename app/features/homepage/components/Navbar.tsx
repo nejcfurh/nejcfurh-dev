@@ -2,6 +2,9 @@
 
 import { JSX, useState, useEffect } from 'react';
 import { useIsMounted } from '@/app/hooks/useIsMounted';
+import { ButtonNameType } from '@/app/analytics/constants';
+import { useButtonTap } from '@/app/analytics/useButtonTap';
+import { NAVBAR_BUTTON_NAME_BY_SECTION } from '../constants/analytics';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { navLinks } from '../constants';
@@ -20,6 +23,7 @@ const Navbar = (): JSX.Element => {
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const mounted = useIsMounted();
+  const trackButtonTap = useButtonTap();
 
   useEffect(() => {
     let frame = 0;
@@ -72,7 +76,10 @@ const Navbar = (): JSX.Element => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
-            onClick={() => setToggle(false)}
+            onClick={() => {
+              trackButtonTap(ButtonNameType.MOBILE_MENU_BACKDROP);
+              setToggle(false);
+            }}
             className="fixed inset-0 z-100 bg-black/50 backdrop-blur-sm md:hidden"
           />
           <MobileMenu onClose={() => setToggle(false)} />
@@ -106,6 +113,7 @@ const Navbar = (): JSX.Element => {
           href="/"
           className="flex items-center gap-3"
           onClick={() => {
+            trackButtonTap(ButtonNameType.NAVBAR_LOGO);
             setActiveId('');
             window.scrollTo(0, 0);
           }}
@@ -121,7 +129,10 @@ const Navbar = (): JSX.Element => {
                 <li key={link.id}>
                   <a
                     href={`#${link.id}`}
-                    onClick={() => setActiveId(link.id)}
+                    onClick={() => {
+                      trackButtonTap(NAVBAR_BUTTON_NAME_BY_SECTION[link.id]);
+                      setActiveId(link.id);
+                    }}
                     className={
                       isContact
                         ? 'inline-block bg-(--accent) text-white rounded-full py-1.5 px-4 text-sm font-medium transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-[0_0_25px_var(--accent-glow)]'
@@ -143,7 +154,10 @@ const Navbar = (): JSX.Element => {
 
           <button
             className="md:hidden w-7 h-7 flex items-center justify-center cursor-pointer text-white-100"
-            onClick={() => setToggle(!toggle)}
+            onClick={() => {
+              trackButtonTap(ButtonNameType.NAVBAR_MENU_TOGGLE);
+              setToggle(!toggle);
+            }}
             aria-label={toggle ? 'Close menu' : 'Open menu'}
           >
             <MenuIcon size={24} />

@@ -1,5 +1,7 @@
 'use client';
 
+import { ButtonNameType } from '@/app/analytics/constants';
+import { useButtonTap } from '@/app/analytics/useButtonTap';
 import {
   useMotionTemplate,
   useScroll,
@@ -52,6 +54,7 @@ const ProjectStackCard = ({
   progress,
   onPreview,
 }: ProjectStackCardProps): JSX.Element => {
+  const trackButtonTap = useButtonTap();
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -145,6 +148,11 @@ const ProjectStackCard = ({
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackButtonTap(ButtonNameType.PROJECT_VISIT, {
+                    ProjectName: project.name,
+                  })
+                }
                 className={`${pillBase} bg-white text-black transition-transform duration-300 ease-out hover:scale-105 active:scale-95`}
               >
                 <span>Visit</span>
@@ -157,6 +165,11 @@ const ProjectStackCard = ({
                 href={project.source_code_link}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackButtonTap(ButtonNameType.PROJECT_SOURCE, {
+                    ProjectName: project.name,
+                  })
+                }
                 className={`${pillBase} border border-white/30 transition-colors hover:bg-white/10`}
               >
                 <Github size={16} />
@@ -166,7 +179,12 @@ const ProjectStackCard = ({
 
             {hasPreview && (
               <button
-                onClick={onPreview}
+                onClick={() => {
+                  trackButtonTap(ButtonNameType.PROJECT_PREVIEW, {
+                    ProjectName: project.name,
+                  });
+                  onPreview?.();
+                }}
                 className={`${pillBase} cursor-pointer border border-white/30 transition-colors hover:bg-white/10`}
               >
                 <Eye size={16} />
