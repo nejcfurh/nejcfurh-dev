@@ -33,7 +33,7 @@
     "@types/react-dom": "^19",
     "autoprefixer": "^10",
     "eslint": "^9",
-    "eslint-config-next": "16.2.3",
+    "eslint-config-next": "16.2.6",
     "typescript": "^5"
   }
 }
