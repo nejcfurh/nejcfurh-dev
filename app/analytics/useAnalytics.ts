@@ -1,14 +1,14 @@
 'use client';
 
 import type {
-  AnalyticsClientEventProperties,
+  AnalyticsClientEvent,
   AnalyticsClientPageEvent,
 } from './types';
 import { usePostHog } from './usePostHog';
 
 export const useAnalytics = (): {
   identify: (params: { userId: string }) => void;
-  trackEvent: (params: AnalyticsClientEventProperties) => void;
+  trackEvent: (params: AnalyticsClientEvent) => void;
   trackPageVisit: (params: AnalyticsClientPageEvent) => void;
 } => {
   const { posthogSession } = usePostHog();
@@ -17,10 +17,10 @@ export const useAnalytics = (): {
     posthogSession?.identify(params.userId);
   };
 
-  const trackEvent = (params: AnalyticsClientEventProperties): void => {
+  const trackEvent = (params: AnalyticsClientEvent): void => {
     const { eventName, properties } = params;
 
-    posthogSession?.capture(eventName, properties);
+    posthogSession?.capture(eventName, { ...properties });
   };
 
   const trackPageVisit = (params: AnalyticsClientPageEvent): void => {

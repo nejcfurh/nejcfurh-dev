@@ -1,5 +1,7 @@
 'use client';
 
+import { ButtonNameType } from '@/app/analytics/constants';
+import { useButtonTap } from '@/app/analytics/useButtonTap';
 import { motion } from 'framer-motion';
 import { JSX } from 'react';
 import { ArrowDown } from 'lucide-react';
@@ -42,6 +44,7 @@ const firstName = 'NEJC';
 const lastName = 'FURH';
 
 const Hero = (): JSX.Element => {
+  const trackButtonTap = useButtonTap();
   const { theme } = useTheme();
   const isDark = theme === 'dark';
 
@@ -140,6 +143,11 @@ const Hero = (): JSX.Element => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
+                onClick={() =>
+                  trackButtonTap(ButtonNameType.HERO_SOCIAL_LINK, {
+                    SocialName: social.name,
+                  })
+                }
                 className={`w-11 h-11 rounded-full outline outline-(--outline-subtle)  bg-transparent grid place-items-center text-white-100 cursor-pointer transition-all duration-300 hover:outline-offset-[3px] ${social.hoverClass}`}
               >
                 {social.icon}
@@ -187,6 +195,7 @@ const Hero = (): JSX.Element => {
       {/* Scroll indicator */}
       <motion.a
         href="#about"
+        onClick={() => trackButtonTap(ButtonNameType.HERO_SCROLL_INDICATOR)}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 0.6 }}

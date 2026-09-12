@@ -4,15 +4,21 @@ import { JSX } from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTheme } from './ThemeProvider';
+import { ButtonNameType } from '@/app/analytics/constants';
+import { useButtonTap } from '@/app/analytics/useButtonTap';
 
 const ThemeToggle = (): JSX.Element => {
   const { theme, toggleTheme } = useTheme();
+  const trackButtonTap = useButtonTap();
   const isDark = theme === 'dark';
 
   return (
     <button
       type="button"
-      onClick={toggleTheme}
+      onClick={event => {
+        trackButtonTap(ButtonNameType.THEME_TOGGLE);
+        toggleTheme(event);
+      }}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       className="relative w-9 h-9 flex items-center justify-center rounded-full text-white-100 transition-colors cursor-pointer hover:bg-(--chip-bg-hover)"
     >

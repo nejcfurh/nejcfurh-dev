@@ -6,6 +6,8 @@ import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
 import { Send, Download, Github } from 'lucide-react';
 import SectionHeading from '@/app/components/SectionHeading';
+import { ButtonNameType } from '@/app/analytics/constants';
+import { useButtonTap } from '@/app/analytics/useButtonTap';
 
 const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
 const serviceId =
@@ -32,6 +34,7 @@ const Contact = (): JSX.Element => {
     message: '',
   });
   const [loading, setLoading] = useState(false);
+  const trackButtonTap = useButtonTap();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -42,6 +45,7 @@ const Contact = (): JSX.Element => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    trackButtonTap(ButtonNameType.CONTACT_SUBMIT);
     if (!isEmailConfigured) {
       toast.error(
         'Contact form is not configured. Add EmailJS keys in environment variables.',
@@ -132,6 +136,7 @@ const Contact = (): JSX.Element => {
               <a
                 href="/data/NF.CV.2026-ENG.pdf"
                 download
+                onClick={() => trackButtonTap(ButtonNameType.CONTACT_DOWNLOAD_CV)}
                 className="flex items-center gap-3 group"
               >
                 <div className="w-10 h-10 rounded-xl bg-(--chip-bg) flex items-center justify-center group-hover:bg-(--chip-bg-hover) transition-colors">
@@ -145,6 +150,9 @@ const Contact = (): JSX.Element => {
                 href="https://github.com/nejcfurh/nejcfurh-claude"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackButtonTap(ButtonNameType.CONTACT_CLAUDE_CONFIG)
+                }
                 className="flex items-center gap-3 group"
               >
                 <div className="w-10 h-10 rounded-xl bg-(--chip-bg) flex items-center justify-center group-hover:bg-(--chip-bg-hover) transition-colors">
