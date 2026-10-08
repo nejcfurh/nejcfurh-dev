@@ -7,6 +7,7 @@ import { ThemeProvider } from './components/theme/ThemeProvider';
 import { THEME_INIT_SCRIPT } from './components/theme/constants';
 import { PostHogProvider } from './analytics/PostHogProvider';
 import { posthogConfig } from './config/app.config';
+import { SITE_URL } from './config/site.config';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -39,10 +40,28 @@ const awesomeSerif = localFont({
   ],
 });
 
+const title = 'Nejc Furh | Product Engineer & Web Developer';
+const description =
+  'Portfolio of Nejc Furh — Product Engineer at Birdbuddy, full-stack web developer specializing in React, Next.js, and modern web technologies.';
+
 export const metadata: Metadata = {
-  title: 'Nejc Furh | Product Engineer & Web Developer',
-  description:
-    'Portfolio of Nejc Furh — Product Engineer at Birdbuddy, full-stack web developer specializing in React, Next.js, and modern web technologies.',
+  metadataBase: new URL(SITE_URL),
+  title,
+  description,
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    url: '/',
+    siteName: 'Nejc Furh',
+    locale: 'en_US',
+    title,
+    description,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({
