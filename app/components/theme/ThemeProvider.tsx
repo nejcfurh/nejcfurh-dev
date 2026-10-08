@@ -3,6 +3,7 @@
 import { createContext, useCallback, useContext, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { useIsMounted } from '@/app/hooks/useIsMounted';
+import { THEME_STORAGE_KEY } from './constants';
 
 export type Theme = 'dark' | 'light';
 
@@ -10,8 +11,6 @@ interface ThemeContextValue {
   theme: Theme;
   toggleTheme: (event?: React.MouseEvent<HTMLElement>) => void;
 }
-
-const STORAGE_KEY = 'theme';
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
@@ -24,7 +23,7 @@ const readInitialTheme = (): Theme => {
 const applyTheme = (theme: Theme): void => {
   document.documentElement.setAttribute('data-theme', theme);
   try {
-    localStorage.setItem(STORAGE_KEY, theme);
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
   } catch {
     /* noop — storage may be unavailable */
   }

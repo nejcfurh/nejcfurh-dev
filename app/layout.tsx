@@ -4,6 +4,7 @@ import { Geist, Geist_Mono, Inter } from 'next/font/google';
 import './globals.css';
 import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from './components/theme/ThemeProvider';
+import { THEME_INIT_SCRIPT } from './components/theme/constants';
 import { PostHogProvider } from './analytics/PostHogProvider';
 import { posthogConfig } from './config/app.config';
 
@@ -51,6 +52,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${awesomeSerif.variable} ${inter.variable} font-sans antialiased bg-primary text-white-100`}
       >
