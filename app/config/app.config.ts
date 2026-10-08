@@ -13,7 +13,10 @@ export const appConfig = {
   env: isAppEnvironment(process.env.NEXT_PUBLIC_ENV)
     ? process.env.NEXT_PUBLIC_ENV
     : AppEnvironment.Development,
-  version: process.env.NEXT_PUBLIC_VERSION ?? 'dev',
+  version:
+    process.env.NEXT_PUBLIC_VERSION ??
+    process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ??
+    'dev',
   serviceName: 'nejcfurh-dev',
 };
 

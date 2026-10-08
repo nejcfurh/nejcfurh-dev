@@ -25,8 +25,8 @@ PostHog is wired up in `app/analytics`, configured from `app/config/app.config.t
 | --- | --- |
 | `NEXT_PUBLIC_POSTHOG_KEY` | PostHog project API key. Analytics stay off while this is unset. |
 | `NEXT_PUBLIC_POSTHOG_HOST` | PostHog ingest host. |
-| `NEXT_PUBLIC_ENV` | `development`, `staging`, `preview` or `production`. Events are only sent outside `development`. |
-| `NEXT_PUBLIC_VERSION` | Reported as the `Version` super property. Defaults to `dev`. |
+| `NEXT_PUBLIC_ENV` | `development`, `staging`, `preview` or `production`. PostHog is only initialised, and events only sent, outside `development`. |
+| `NEXT_PUBLIC_VERSION` | Reported as the `Version` super property. Falls back to the short Vercel commit SHA, then `dev`. |
 
 ## Deployment
 
