@@ -2,7 +2,7 @@
 
 import { ButtonNameType } from '@/app/analytics/constants';
 import { useButtonTap } from '@/app/analytics/useButtonTap';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { JSX } from 'react';
 import { ArrowDown } from 'lucide-react';
 import Image from 'next/image';

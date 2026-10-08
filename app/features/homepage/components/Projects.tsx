@@ -2,7 +2,7 @@
 
 import { ButtonNameType } from '@/app/analytics/constants';
 import { useButtonTap } from '@/app/analytics/useButtonTap';
-import { AnimatePresence, useScroll } from 'framer-motion';
+import { AnimatePresence, useScroll } from 'motion/react';
 import {
   JSX,
   lazy,

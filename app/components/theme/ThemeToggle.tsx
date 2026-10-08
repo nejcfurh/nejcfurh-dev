@@ -2,7 +2,7 @@
 
 import { JSX } from 'react';
 import { Moon, Sun } from 'lucide-react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import { useTheme } from './ThemeProvider';
 import { ButtonNameType } from '@/app/analytics/constants';
 import { useButtonTap } from '@/app/analytics/useButtonTap';

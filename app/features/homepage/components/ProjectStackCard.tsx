@@ -8,7 +8,7 @@ import {
   useTransform,
   type MotionValue,
   type Variants,
-} from 'framer-motion';
+} from 'motion/react';
 import { ArrowUpRight, Eye, Github } from 'lucide-react';
 import { JSX, useRef } from 'react';
 import AnimatedDiv from '@/app/components/motion/AnimatedDiv';

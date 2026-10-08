@@ -1,6 +1,6 @@
 'use client';
 
-import { useMotionValue, useSpring, useTransform, motion } from 'framer-motion';
+import { useMotionValue, useSpring, useTransform, motion } from 'motion/react';
 import { JSX, useEffect, useState } from 'react';
 
 type SpringOptions = {

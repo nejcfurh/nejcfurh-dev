@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { JSX, useMemo, useSyncExternalStore } from 'react';
 
 const EASE = [0.76, 0, 0.24, 1] as const;

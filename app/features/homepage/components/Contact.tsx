@@ -3,7 +3,7 @@
 import emailjs from '@emailjs/browser';
 import { JSX, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { Send, Download, Github } from 'lucide-react';
 import SectionHeading from '@/app/components/SectionHeading';
 import { ButtonNameType } from '@/app/analytics/constants';

@@ -10,7 +10,7 @@ import Link from 'next/link';
 import { navLinks } from '../constants';
 import Logo from '@/app/components/Logo';
 import { MenuIcon } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 import ThemeToggle from '@/app/components/theme/ThemeToggle';
 import MobileMenu from './MobileMenu';
 

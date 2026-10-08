@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring } from "motion/react";
 import { JSX } from "react";
 
 const ScrollProgress = (): JSX.Element => {
