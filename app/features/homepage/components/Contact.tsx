@@ -15,8 +15,6 @@ const serviceId =
   process.env.NEXT_PUBLIC_MAILJS_SERVICE_ID;
 const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
-const isEmailConfigured = Boolean(templateId && serviceId && publicKey);
-
 const toastStyle = {
   border: '1px solid var(--toast-border)',
   borderRadius: '12px',
@@ -46,7 +44,7 @@ const Contact = (): JSX.Element => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     trackButtonTap(ButtonNameType.CONTACT_SUBMIT);
-    if (!isEmailConfigured) {
+    if (!templateId || !serviceId || !publicKey) {
       toast.error(
         'Contact form is not configured. Add EmailJS keys in environment variables.',
         {
@@ -57,21 +55,21 @@ const Contact = (): JSX.Element => {
       );
       return;
     }
-    setLoading(true);
 
-    if (!form.name || !form.email || !form.message) {
-      setLoading(false);
-      return toast.error('Please fill in all fields.', {
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      toast.error('Please fill in all fields.', {
         duration: 1500,
         style: toastStyle,
         iconTheme: { primary: '#ef4444', secondary: '#fafafa' },
       });
+      return;
     }
 
+    setLoading(true);
     emailjs
       .send(
-        serviceId!,
-        templateId!,
+        serviceId,
+        templateId,
         {
           from_name: form.name,
           to_name: 'Nejc',
@@ -79,7 +77,7 @@ const Contact = (): JSX.Element => {
           to_email: 'nejc.furh7@gmail.com',
           message: form.message,
         },
-        publicKey!,
+        publicKey,
       )
       .then(
         () => {
@@ -192,6 +190,7 @@ const Contact = (): JSX.Element => {
                   id="name"
                   type="text"
                   name="name"
+                  required
                   value={form.name}
                   onChange={handleChange}
                   placeholder="Your name"
@@ -209,6 +208,7 @@ const Contact = (): JSX.Element => {
                   id="email"
                   type="email"
                   name="email"
+                  required
                   value={form.email}
                   onChange={handleChange}
                   placeholder="your@email.com"
@@ -226,6 +226,7 @@ const Contact = (): JSX.Element => {
                   id="message"
                   rows={4}
                   name="message"
+                  required
                   value={form.message}
                   onChange={handleChange}
                   placeholder="Your message for me..."
