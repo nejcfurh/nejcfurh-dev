@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { JSX, useRef, useState, useEffect } from 'react';
 import SectionHeading from '@/app/components/SectionHeading';
 import Image from 'next/image';

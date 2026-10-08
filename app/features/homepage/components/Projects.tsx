@@ -2,7 +2,7 @@
 
 import { ButtonNameType } from '@/app/analytics/constants';
 import { useButtonTap } from '@/app/analytics/useButtonTap';
-import { AnimatePresence, useScroll } from 'framer-motion';
+import { AnimatePresence, useScroll } from 'motion/react';
 import {
   JSX,
   lazy,
@@ -21,7 +21,7 @@ import { projects } from '../constants';
 import ProjectStackCard from './ProjectStackCard';
 
 const PersonalYearInReview = lazy(
-  () => import('@/app/features/personal-year-in-review/page'),
+  () => import('@/app/features/personal-year-in-review/YearInReview'),
 );
 
 // How much each card shrinks per card stacked on top of it. Kept gentle so the

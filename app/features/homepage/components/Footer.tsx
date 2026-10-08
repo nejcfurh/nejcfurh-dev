@@ -4,7 +4,7 @@ import { ButtonNameType } from '@/app/analytics/constants';
 import { useButtonTap } from '@/app/analytics/useButtonTap';
 import { JSX } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { ArrowUp } from 'lucide-react';
 import { socialLinks } from '../constants/socialLinks';
 

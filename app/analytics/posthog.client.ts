@@ -14,7 +14,8 @@ export class PostHogClientSession {
     this.debug = debug;
 
     // posthog-js reaches for the File API on import, which breaks the server build on Node versions that lack it.
-    if (typeof window !== 'undefined') {
+    // Skipping init while disabled also keeps PostHog's own autocapture out of development.
+    if (typeof window !== 'undefined' && this.isEnabled) {
       posthog.init(apiKey, {
         api_host: apiHost,
         debug,

@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useInView } from 'motion/react';
 import { droneShotVideos } from '../constants';
 import { useMediaQuery } from '@/app/hooks/useMediaQuery';
 
@@ -29,6 +30,53 @@ const computeClip = (
   }
 };
 
+// iOS Safari occasionally ignores the `loop` attribute on autoplaying
+// muted videos and pauses on the last frame; force a restart as a fallback.
+const handleEnded = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+  const video = e.currentTarget;
+  video.currentTime = 0;
+  video.play().catch(() => {});
+};
+
+interface DroneVideoProps {
+  src: string;
+  poster: string;
+  className: string;
+}
+
+// No autoPlay and preload="none": a clip downloads only once it nears the
+// viewport, instead of every clip loading with the page.
+const DroneVideo = ({ src, poster, className }: DroneVideoProps) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const isInView = useInView(videoRef, { margin: '200px 0px' });
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (isInView) {
+      video.play().catch(() => {});
+    } else if (!video.paused) {
+      // pause() on a never-loaded element starts the resource fetch, so only
+      // pause one that is actually playing.
+      video.pause();
+    }
+  }, [isInView]);
+
+  return (
+    <video
+      ref={videoRef}
+      className={className}
+      muted
+      loop
+      playsInline
+      preload="none"
+      poster={poster}
+      onEnded={handleEnded}
+      src={src}
+    />
+  );
+};
+
 const AngledMediaSlider = () => {
   const [hovered, setHovered] = useState<number | null>(null);
   const isMobile = useMediaQuery('(max-width: 768px)');
@@ -36,27 +84,15 @@ const AngledMediaSlider = () => {
   const count = droneShotVideos.length;
   const pps = 100 / count;
 
-  // iOS Safari occasionally ignores the `loop` attribute on autoplaying
-  // muted videos and pauses on the last frame; force a restart as a fallback.
-  const handleEnded = (e: React.SyntheticEvent<HTMLVideoElement>) => {
-    const video = e.currentTarget;
-    video.currentTime = 0;
-    video.play().catch(() => {});
-  };
-
   if (isMobile) {
     return (
       <ul className="m-0 flex flex-col gap-3 list-none p-0">
         {droneShotVideos.map(item => (
           <li key={item.video} className="rounded-xl overflow-hidden">
-            <video
+            <DroneVideo
               className="w-full aspect-video object-cover"
-              muted
-              autoPlay
-              loop
-              playsInline
-              onEnded={handleEnded}
               src={item.video}
+              poster={item.poster}
             />
           </li>
         ))}
@@ -81,14 +117,10 @@ const AngledMediaSlider = () => {
               className="relative outline-none"
             >
               <div className="absolute inset-0">
-                <video
+                <DroneVideo
                   className="h-full w-full object-cover"
-                  muted
-                  autoPlay
-                  loop
-                  playsInline
-                  onEnded={handleEnded}
                   src={item.video}
+                  poster={item.poster}
                 />
               </div>
             </li>

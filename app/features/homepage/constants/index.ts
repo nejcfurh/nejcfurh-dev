@@ -399,22 +399,27 @@ const droneShotVideos = [
   {
     title: 'Monterrigioni, Italy',
     video: '/videos/drone-shots/monteriggioni.mp4',
+    poster: '/images/drone-shots/monteriggioni.jpg',
   },
   {
     title: 'Pienza (Elysium fields), Italy',
     video: '/videos/drone-shots/pienza-fields.mp4',
+    poster: '/images/drone-shots/pienza-fields.jpg',
   },
   {
     title: 'San Galgano, Italy',
     video: '/videos/drone-shots/san-galgano.mp4',
+    poster: '/images/drone-shots/san-galgano.jpg',
   },
   {
     title: 'Volterra, Italy',
     video: '/videos/drone-shots/volterra.mp4',
+    poster: '/images/drone-shots/volterra.jpg',
   },
   {
     title: 'Most na Soči, Slovenia',
     video: '/videos/drone-shots/most-na-soci.mp4',
+    poster: '/images/drone-shots/most-na-soci.jpg',
   },
 ];
 

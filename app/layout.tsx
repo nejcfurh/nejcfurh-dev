@@ -4,8 +4,10 @@ import { Geist, Geist_Mono, Inter } from 'next/font/google';
 import './globals.css';
 import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from './components/theme/ThemeProvider';
+import { THEME_INIT_SCRIPT } from './components/theme/constants';
 import { PostHogProvider } from './analytics/PostHogProvider';
 import { posthogConfig } from './config/app.config';
+import { SITE_URL } from './config/site.config';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -38,10 +40,28 @@ const awesomeSerif = localFont({
   ],
 });
 
+const title = 'Nejc Furh | Product Engineer & Web Developer';
+const description =
+  'Portfolio of Nejc Furh — Product Engineer at Birdbuddy, full-stack web developer specializing in React, Next.js, and modern web technologies.';
+
 export const metadata: Metadata = {
-  title: 'Nejc Furh | Product Engineer & Web Developer',
-  description:
-    'Portfolio of Nejc Furh — Product Engineer at Birdbuddy, full-stack web developer specializing in React, Next.js, and modern web technologies.',
+  metadataBase: new URL(SITE_URL),
+  title,
+  description,
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    url: '/',
+    siteName: 'Nejc Furh',
+    locale: 'en_US',
+    title,
+    description,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({
@@ -51,6 +71,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${awesomeSerif.variable} ${inter.variable} font-sans antialiased bg-primary text-white-100`}
       >
