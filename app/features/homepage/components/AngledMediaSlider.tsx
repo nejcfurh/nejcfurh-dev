@@ -1,9 +1,12 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { useInView } from 'motion/react';
+import { AnimatePresence, motion, useInView, useReducedMotion } from 'motion/react';
+import { MapPin } from 'lucide-react';
 import { droneShotVideos } from '../constants';
 import { useMediaQuery } from '@/app/hooks/useMediaQuery';
+
+const AUTO_CYCLE_MS = 4500;
 
 const computeClip = (
   idx: number,
@@ -79,21 +82,42 @@ const DroneVideo = ({ src, poster, className }: DroneVideoProps) => {
 
 const AngledMediaSlider = () => {
   const [hovered, setHovered] = useState<number | null>(null);
+  const [autoIndex, setAutoIndex] = useState(0);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sliderRef, { margin: '-80px 0px' });
+  const reduceMotion = useReducedMotion();
   const isMobile = useMediaQuery('(max-width: 768px)');
   const split = 50;
   const count = droneShotVideos.length;
   const pps = 100 / count;
 
+  // Cycles through the clips while nobody is hovering; a hover takes over and pauses it.
+  const isAutoCycling = !isMobile && isInView && hovered === null && !reduceMotion;
+  useEffect(() => {
+    if (!isAutoCycling) return;
+    const timer = setInterval(
+      () => setAutoIndex(index => (index + 1) % count),
+      AUTO_CYCLE_MS,
+    );
+    return () => clearInterval(timer);
+  }, [isAutoCycling, count]);
+
+  const active = hovered ?? (reduceMotion ? null : autoIndex);
+
   if (isMobile) {
     return (
       <ul className="m-0 flex flex-col gap-3 list-none p-0">
         {droneShotVideos.map(item => (
-          <li key={item.video} className="rounded-xl overflow-hidden">
+          <li key={item.video} className="relative rounded-xl overflow-hidden">
             <DroneVideo
               className="w-full aspect-video object-cover"
               src={item.video}
               poster={item.poster}
             />
+            <div className="pointer-events-none absolute bottom-3 left-3 flex items-center gap-1.5 rounded-full border border-white/20 bg-black/55 px-3 py-1.5 backdrop-blur-md">
+              <MapPin size={12} className="text-[#cfe0f5]" />
+              <span className="text-xs font-medium text-white">{item.title}</span>
+            </div>
           </li>
         ))}
       </ul>
@@ -101,11 +125,30 @@ const AngledMediaSlider = () => {
   }
 
   return (
-    <div className="relative rounded-3xl overflow-hidden">
+    <div ref={sliderRef} className="relative rounded-3xl overflow-hidden">
       <div
         className="absolute inset-0 z-10 pointer-events-none rounded-3xl border border-(--slider-border)"
         style={{ boxShadow: 'inset 0 0 80px 30px var(--slider-vignette)' }}
       />
+      <AnimatePresence mode="wait">
+        {active !== null && (
+          <motion.div
+            key={active}
+            className="pointer-events-none absolute bottom-6 z-20 flex items-center gap-2 rounded-full border border-white/20 bg-black/55 px-3.5 py-2 backdrop-blur-md"
+            // The active slice's bottom-left corner, from the same geometry computeClip uses.
+            style={{ left: `calc(${active * 2 * split}px + 24px)` }}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <MapPin size={14} className="text-[#cfe0f5]" />
+            <span className="text-sm font-medium text-white">
+              {droneShotVideos[active].title}
+            </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <ul className="angled-slider relative m-0 grid list-none p-0">
         {droneShotVideos.map((item, idx) => {
           return (
@@ -113,7 +156,10 @@ const AngledMediaSlider = () => {
               key={item.video}
               onMouseEnter={() => setHovered(idx)}
               onMouseLeave={() => setHovered(null)}
-              style={{ clipPath: computeClip(idx, hovered, pps, split, count) }}
+              style={{
+                clipPath: computeClip(idx, active, pps, split, count),
+                filter: active !== null && idx !== active ? 'brightness(0.5)' : 'none',
+              }}
               className="relative outline-none"
             >
               <div className="absolute inset-0">

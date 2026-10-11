@@ -165,20 +165,36 @@
   }
 
   /* ---- Gradient Orbs ---- */
+  /* A dithered mask drawn by GlowMask rather than a blur or CSS gradient: both draw
+     the few alpha levels of a glow this faint as visible rings. The mask carries the
+     glow's opacity itself, and the glows fade in once it exists. */
   .gradient-orb {
     position: absolute;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.15;
+    opacity: 0;
     pointer-events: none;
+    transition: opacity 0.8s ease;
+  }
+
+  :root[data-orb-mask] .gradient-orb {
+    opacity: 1;
+  }
+
+  .gradient-orb::before {
+    content: '';
+    position: absolute;
+    /* GlowMask draws its mask for this box: 400px grown by 50% each side. */
+    inset: -50%;
+    background: var(--orb-color);
+    -webkit-mask: var(--orb-mask) center / 100% 100% no-repeat;
+    mask: var(--orb-mask) center / 100% 100% no-repeat;
   }
 
   .gradient-orb-accent {
-    background: var(--accent);
+    --orb-color: var(--accent);
   }
 
   .gradient-orb-purple {
-    background: #7c3aed;
+    --orb-color: #7c3aed;
   }
 
   /* ---- Text Gradients ---- */
@@ -336,8 +352,10 @@
     grid-area: 1 / 1;
     min-height: 0;
     height: 100%;
-    transition: clip-path 0.5s ease;
-    will-change: clip-path;
+    transition:
+      clip-path 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: clip-path, filter;
   }
 
 
