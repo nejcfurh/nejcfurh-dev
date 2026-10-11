@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import type { YearInReviewNamedBirdStats } from '../types/types';
 
@@ -14,24 +14,16 @@ interface UseNamedBirdImagePreloadReturn {
 export const useNamedBirdImagePreload = ({
   namedBirdVisitStats,
 }: UseNamedBirdImagePreloadProps): UseNamedBirdImagePreloadReturn => {
-  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [allLoaded, setAllLoaded] = useState(false);
   const [loadedUrls, setLoadedUrls] = useState<Set<string>>(new Set());
 
-  useEffect(() => {
-    const namedBirds = namedBirdVisitStats?.namedBirds ?? [];
-
-    if (namedBirds.length === 0) {
-      setImagesLoaded(true);
-
-      return;
-    }
-
-    // GET ALL UNIQUE IMAGE URLs TO PRELOAD
+  // GET ALL UNIQUE IMAGE URLs TO PRELOAD
+  const urlsArray = useMemo(() => {
     const imageUrls = new Set<string>();
 
     // ANY WAS SET BECAUSE THE TYPES ARE NOT NEEDED AS THE MOCK DATA IS USED INSTEAD
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    namedBirds.forEach((bird: any) => {
+    (namedBirdVisitStats?.namedBirds ?? []).forEach((bird: any) => {
       // IMAGES
       const firstMedia = bird.namedBird.previewMedia?.[0];
 
@@ -44,13 +36,11 @@ export const useNamedBirdImagePreload = ({
       }
     });
 
-    const urlsArray = Array.from(imageUrls);
+    return Array.from(imageUrls);
+  }, [namedBirdVisitStats]);
 
-    if (urlsArray.length === 0) {
-      setImagesLoaded(true);
-
-      return;
-    }
+  useEffect(() => {
+    if (urlsArray.length === 0) return;
 
     let loadedCount = 0;
     const totalImages = urlsArray.length;
@@ -69,7 +59,7 @@ export const useNamedBirdImagePreload = ({
             return newSet;
           });
           if (loadedCount === totalImages) {
-            setImagesLoaded(true);
+            setAllLoaded(true);
           }
           resolve();
         };
@@ -77,7 +67,7 @@ export const useNamedBirdImagePreload = ({
           // DON'T REJECT - JUST CONTINUE AND MARK AS "LOADED" ANYWAY
           loadedCount++;
           if (loadedCount === totalImages) {
-            setImagesLoaded(true);
+            setAllLoaded(true);
           }
           resolve();
         };
@@ -87,12 +77,13 @@ export const useNamedBirdImagePreload = ({
 
     Promise.all(urlsArray.map(url => preloadImage(url))).catch(error => {
       console.error(error);
-      setImagesLoaded(true);
+      setAllLoaded(true);
     });
-  }, [namedBirdVisitStats]);
+  }, [urlsArray]);
 
   return {
-    imagesLoaded,
+    // NOTHING TO PRELOAD COUNTS AS LOADED
+    imagesLoaded: urlsArray.length === 0 || allLoaded,
     loadedUrls,
   };
 };

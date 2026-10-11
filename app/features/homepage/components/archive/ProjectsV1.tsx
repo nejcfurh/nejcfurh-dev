@@ -13,7 +13,8 @@ import {
   useState,
 } from 'react';
 import Image from 'next/image';
-import { ArrowUpRight, Eye, Github, X } from 'lucide-react';
+import { ArrowUpRight, Eye, X } from 'lucide-react';
+import { BsGithub } from 'react-icons/bs';
 import SectionHeading from '@/app/components/SectionHeading';
 import AnimatedDiv from '@/app/components/motion/AnimatedDiv';
 import AnimatedText from '@/app/components/motion/AnimatedText';
@@ -146,7 +147,7 @@ const AdditionalProjectCard = ({
                 }
                 className="inline-flex items-center gap-1.5 rounded-full border border-[var(--outline-subtle)] px-3 py-1.5 text-xs font-semibold backdrop-blur-sm transition-colors hover:bg-[var(--chip-bg-hover)] sm:border-white/30 sm:hover:bg-white/10"
               >
-                <Github size={14} />
+                <BsGithub size={14} />
                 <span>Source</span>
               </a>
             )}

@@ -12,7 +12,8 @@ import {
   useTransform,
 } from 'motion/react';
 import Image from 'next/image';
-import { ArrowUpRight, Eye, Github } from 'lucide-react';
+import { ArrowUpRight, Eye } from 'lucide-react';
+import { BsGithub } from 'react-icons/bs';
 import { JSX, useCallback, useEffect, useRef, useState } from 'react';
 import SectionHeading from '@/app/components/SectionHeading';
 import {
@@ -218,7 +219,7 @@ const FeaturedCard = ({
                 onClick={() => trackButtonTap(ButtonNameType.PROJECT_SOURCE, { ProjectName: project.name })}
                 className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-white/35 bg-black/30 px-5 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/10"
               >
-                <Github size={15} />
+                <BsGithub size={15} />
                 Source
               </a>
             )}
@@ -290,7 +291,7 @@ const MoreCard = ({ project, index }: { project: Project; index: number }): JSX.
                   onClick={() => trackButtonTap(ButtonNameType.PROJECT_SOURCE, { ProjectName: project.name })}
                   className="flex size-9 items-center justify-center rounded-full border border-white/35 bg-black/55 text-white backdrop-blur-md transition-colors hover:bg-black/75"
                 >
-                  <Github size={15} />
+                  <BsGithub size={15} />
                 </a>
               )}
             </div>
