@@ -13,8 +13,10 @@ const AnimatedNumberBasic = ({
 }): React.JSX.Element => {
   const [value, setValue] = useState(0);
 
+  // Starts at 0 and switches to the real value after the first frame, so it animates up.
   useEffect(() => {
-    setValue(passedValue);
+    const frame = requestAnimationFrame(() => setValue(passedValue));
+    return () => cancelAnimationFrame(frame);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

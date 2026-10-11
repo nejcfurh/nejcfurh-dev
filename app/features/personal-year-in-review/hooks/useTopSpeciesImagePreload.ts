@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import type { YearInReviewSpeciesVisit } from '../types/types';
 
@@ -14,33 +14,25 @@ interface UseTopSpeciesImagePreloadReturn {
 export const useTopSpeciesImagePreload = ({
   topSpecies,
 }: UseTopSpeciesImagePreloadProps): UseTopSpeciesImagePreloadReturn => {
-  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [allLoaded, setAllLoaded] = useState(false);
   const [loadedUrls, setLoadedUrls] = useState<Set<string>>(new Set());
 
-  useEffect(() => {
-    if (!topSpecies?.medias || topSpecies.medias.length === 0) {
-      setImagesLoaded(true);
-
-      return;
-    }
-
-    // Get all unique image URLs to preload
+  // Get all unique image URLs to preload
+  const urlsArray = useMemo(() => {
     const imageUrls = new Set<string>();
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    topSpecies.medias.forEach((media: any) => {
+    topSpecies?.medias?.forEach((media: any) => {
       if (media?.__typename === 'MediaImage') {
         imageUrls.add(media.thumbnailUrl);
       }
     });
 
-    const urlsArray = Array.from(imageUrls);
+    return Array.from(imageUrls);
+  }, [topSpecies]);
 
-    if (urlsArray.length === 0) {
-      setImagesLoaded(true);
-
-      return;
-    }
+  useEffect(() => {
+    if (urlsArray.length === 0) return;
 
     let loadedCount = 0;
     const totalImages = urlsArray.length;
@@ -59,7 +51,7 @@ export const useTopSpeciesImagePreload = ({
             return newSet;
           });
           if (loadedCount === totalImages) {
-            setImagesLoaded(true);
+            setAllLoaded(true);
           }
           resolve();
         };
@@ -67,7 +59,7 @@ export const useTopSpeciesImagePreload = ({
           // Don't reject - just continue and mark as "loaded" anyway
           loadedCount++;
           if (loadedCount === totalImages) {
-            setImagesLoaded(true);
+            setAllLoaded(true);
           }
           resolve();
         };
@@ -77,12 +69,13 @@ export const useTopSpeciesImagePreload = ({
 
     Promise.all(urlsArray.map(url => preloadImage(url))).catch(error => {
       console.error(error);
-      setImagesLoaded(true);
+      setAllLoaded(true);
     });
-  }, [topSpecies]);
+  }, [urlsArray]);
 
   return {
-    imagesLoaded,
+    // Nothing to preload counts as loaded.
+    imagesLoaded: urlsArray.length === 0 || allLoaded,
     loadedUrls,
   };
 };

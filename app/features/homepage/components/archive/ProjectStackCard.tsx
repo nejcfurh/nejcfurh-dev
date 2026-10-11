@@ -9,7 +9,8 @@ import {
   type MotionValue,
   type Variants,
 } from 'motion/react';
-import { ArrowUpRight, Eye, Github } from 'lucide-react';
+import { ArrowUpRight, Eye } from 'lucide-react';
+import { BsGithub } from 'react-icons/bs';
 import { JSX, useRef } from 'react';
 import AnimatedDiv from '@/app/components/motion/AnimatedDiv';
 import AnimatedImage from '@/app/components/motion/AnimatedImage';
@@ -172,7 +173,7 @@ const ProjectStackCard = ({
                 }
                 className={`${pillBase} border border-white/30 transition-colors hover:bg-white/10`}
               >
-                <Github size={16} />
+                <BsGithub size={16} />
                 <span>Source</span>
               </a>
             )}

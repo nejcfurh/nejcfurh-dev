@@ -4,7 +4,8 @@ import emailjs from '@emailjs/browser';
 import { JSX, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { motion } from 'motion/react';
-import { Send, Download, Github } from 'lucide-react';
+import { Send, Download } from 'lucide-react';
+import { BsGithub } from 'react-icons/bs';
 import SectionHeading from '@/app/components/SectionHeading';
 import { ButtonNameType } from '@/app/analytics/constants';
 import { useButtonTap } from '@/app/analytics/useButtonTap';
@@ -154,7 +155,7 @@ const Contact = (): JSX.Element => {
                 className="flex items-center gap-3 group"
               >
                 <div className="w-10 h-10 rounded-xl bg-(--chip-bg) flex items-center justify-center group-hover:bg-(--chip-bg-hover) transition-colors">
-                  <Github size={16} className="text-accent" />
+                  <BsGithub size={16} className="text-accent" />
                 </div>
                 <span className="text-secondary text-sm group-hover:text-white-100 transition-colors">
                   Personal Claude Code Config (nejcfurh-claude)
