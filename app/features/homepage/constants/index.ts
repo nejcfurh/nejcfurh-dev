@@ -1,6 +1,7 @@
 import {
   advisera,
   birdbuddy,
+  freelance,
   css,
   docker,
   figma,
@@ -132,6 +133,8 @@ const experiences = [
     title: 'IT Consultant & Support Specialist',
     company_name: 'Advisera / Conformio - Croatia',
     icon: advisera,
+    // The logo carries its own navy background, so it fills the tile edge to edge.
+    logoFill: true,
     iconBg: '#E6DEDD',
     date: 'June 2022 - December 2022',
     points: [
@@ -143,7 +146,7 @@ const experiences = [
   {
     title: 'Web / Software Developer',
     company_name: 'Self-employed / Freelance',
-    icon: reactjs,
+    icon: freelance,
     iconBg: '#E6DEDD',
     date: 'October 2022 - Present',
     points: [
@@ -159,7 +162,7 @@ const experiences = [
     iconBg: '#E6DEDD',
     date: 'December 2022 - January 2024',
     points: [
-      'Served as the final escalation point for complex hardware and software issues across BirdBuddy products',
+      'Served as the final escalation point for complex hardware and software issues across Birdbuddy products',
       'Partnered with designers, PMs, and engineers to diagnose root causes and improve product reliability',
       'Synthesized recurring customer feedback into actionable reports that drove product improvements',
     ],
@@ -193,13 +196,14 @@ const experiences = [
 const projects = [
   {
     name: 'Design Lab',
+    label: 'My animation lab · Open source',
     description:
       'A showcase of multiple pages, interactive UI components featuring 3D effects, scroll-driven animations, drag & drop, parallax, and holographic tilt cards — built as a living reusable design system.',
     tags: [
-      { name: 'Next.js', color: '' },
-      { name: 'Three.js', color: '' },
-      { name: 'Motion', color: '' },
-      { name: 'Tailwind', color: '' },
+      { name: 'next.js', color: '' },
+      { name: 'three.js', color: '' },
+      { name: 'motion', color: '' },
+      { name: 'tailwind', color: '' },
     ],
     image: '/images/projects/design-lab.jpg',
     source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
@@ -210,11 +214,11 @@ const projects = [
     description:
       'Real-time messenger clone with direct and group conversations, read receipts, image sharing, and online status — powered by Pusher for instant updates.',
     tags: [
-      { name: 'Next.js', color: '' },
-      { name: 'Prisma', color: '' },
-      { name: 'MongoDB', color: '' },
-      { name: 'Pusher', color: '' },
-      { name: 'NextAuth', color: '' },
+      { name: 'next.js', color: '' },
+      { name: 'prisma', color: '' },
+      { name: 'mongodb', color: '' },
+      { name: 'pusher', color: '' },
+      { name: 'nextauth', color: '' },
     ],
     image: '/images/projects/twabblr.jpg',
     source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
@@ -225,10 +229,10 @@ const projects = [
     description:
       'Mobile-only 3D survival game with bird flight mechanics, feeder placement, threat systems, and procedural terrain — built entirely in the browser with Three.js.',
     tags: [
-      { name: 'Next.js', color: '' },
-      { name: 'Three.js', color: '' },
-      { name: 'R3F', color: '' },
-      { name: 'Zustand', color: '' },
+      { name: 'next.js', color: '' },
+      { name: 'three.js', color: '' },
+      { name: 'r3f', color: '' },
+      { name: 'zustand', color: '' },
     ],
     image: '/images/projects/backyard-skies.jpg',
     source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
@@ -239,9 +243,9 @@ const projects = [
     description:
       'Cloud storage and secure file sharing platform with real-time sync, file organization, and team collaboration — backed by Convex for instant database updates.',
     tags: [
-      { name: 'Next.js', color: '' },
-      { name: 'Convex', color: '' },
-      { name: 'Clerk', color: '' },
+      { name: 'next.js', color: '' },
+      { name: 'convex', color: '' },
+      { name: 'clerk', color: '' },
       { name: 'shadcn/ui', color: '' },
     ],
     image: '/images/projects/n-drive.jpg',
@@ -250,15 +254,16 @@ const projects = [
   },
   {
     name: 'Birdbuddy WIKI',
+    label: 'Birdbuddy · In production',
+    highlight: { value: 10000, suffix: '+ species' },
     description:
       'A public bird encyclopedia featuring over 10,000 species with detailed profiles, images, and habitat information — a Wikipedia for birds, built for the Birdbuddy community.',
     tags: [
-      { name: 'Next.js', color: '' },
-      { name: 'Tailwind', color: '' },
-      { name: 'Supabase', color: '' },
+      { name: 'next.js', color: '' },
+      { name: 'tailwind', color: '' },
+      { name: 'supabase', color: '' },
       { name: 'shadcn/ui', color: '' },
-      { name: 'GraphQL', color: '' },
-      { name: 'Vercel', color: '' },
+      { name: 'graphql', color: '' },
     ],
     image: '/images/projects/bb-wiki.jpg',
     source_code_link: '',
@@ -269,9 +274,9 @@ const projects = [
     description:
       'Content management system powering BB Wiki — enabling non-technical team members to create, edit, and publish documentation with a visual editor.',
     tags: [
-      { name: 'Next.js', color: '' },
-      { name: 'Tailwind', color: '' },
-      { name: 'PayloadCMS', color: '' },
+      { name: 'next.js', color: '' },
+      { name: 'tailwind', color: '' },
+      { name: 'payloadcms', color: '' },
       { name: 'supabase', color: '' },
     ],
     image: '/images/projects/bb-wiki-cms.jpg',
@@ -280,13 +285,16 @@ const projects = [
   },
   {
     name: 'Birdbuddy Year in Birds',
+    label: 'Birdbuddy · Yearly campaign',
+    highlight: { text: 'Every Birdbuddy user' },
     description:
-      'Birdbuddy Year in Birds is a spinoff of Spotify Wrapped, but for birds. Link leads to a global overview, preview opens a personalized Year in Birds that each Birdbuddy user received.',
+      'Birdbuddy Year in Birds is a Spotify Wrapped-style yearly recap, but for birds. Link leads to a global overview, preview opens a personalized Year in Birds that each Birdbuddy user received.',
     tags: [
-      { name: 'Next.js', color: '' },
-      { name: 'Tailwind', color: '' },
-      { name: 'GraphQL', color: '' },
-      { name: 'Motion', color: '' },
+      { name: 'next.js', color: '' },
+      { name: 'tailwind', color: '' },
+      { name: 'graphql', color: '' },
+      { name: 'motion', color: '' },
+      { name: 'vercel', color: '' },
     ],
     image: '/images/projects/bb-year-in-birds.jpg',
     source_code_link: '',
@@ -298,10 +306,10 @@ const projects = [
     description:
       'Conservation initiative website with full-screen animations, parallax effects, stacked cards, interactive carousels, and page visit analytics.',
     tags: [
-      { name: 'Next.js', color: '' },
-      { name: 'Motion', color: '' },
-      { name: 'Tailwind', color: '' },
-      { name: 'AI_SDK', color: '' },
+      { name: 'next.js', color: '' },
+      { name: 'motion', color: '' },
+      { name: 'tailwind', color: '' },
+      { name: 'ai_sdk', color: '' },
     ],
     image: '/images/projects/friends-of-nature.jpg',
     source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
@@ -309,13 +317,15 @@ const projects = [
   },
   {
     name: 'Wonder',
+    label: 'Product launch · Live',
+    highlight: { value: 2.4, decimals: 1, prefix: '$', suffix: 'M on Kickstarter' },
     description:
-      'Wonder is a platform for a new product that is currently in development after a successful Kickstarter campaign (raised more than $2.400.000).',
+      'Wonder is a platform for a new product that is currently in development after a successful Kickstarter campaign (raised more than $2.4M).',
     tags: [
-      { name: 'Next.js', color: '' },
-      { name: 'Stripe', color: '' },
-      { name: 'Firebase', color: '' },
-      { name: 'Tailwind', color: '' },
+      { name: 'next.js', color: '' },
+      { name: 'stripe', color: '' },
+      { name: 'firebase', color: '' },
+      { name: 'tailwind', color: '' },
     ],
     image: '/images/projects/petal.jpg',
     source_code_link: '',
@@ -323,15 +333,15 @@ const projects = [
   },
   {
     name: 'Seoul Beauty Club',
+    label: 'Subscription commerce · Live',
     description:
       'Seoul Beauty Club is a premium community and subscription platform dedicated to authentic Korean skincare.',
     tags: [
-      { name: 'Next.js', color: '' },
-      { name: 'Stripe', color: '' },
-      { name: 'Firebase', color: '' },
-      { name: 'Tailwind', color: '' },
-      { name: 'Supabase', color: '' },
-      { name: 'Typescript', color: '' },
+      { name: 'next.js', color: '' },
+      { name: 'stripe', color: '' },
+      { name: 'tailwind', color: '' },
+      { name: 'google cloud', color: '' },
+      { name: 'typescript', color: '' },
     ],
     image: '/images/projects/sbc.jpg',
     source_code_link: '',
@@ -342,10 +352,10 @@ const projects = [
     description:
       'Card-based task manager with multiple OAuth providers (Google, Facebook, GitHub, X), custom lists, image uploads via Supabase, and a polished UI.',
     tags: [
-      { name: 'Next.js', color: '' },
-      { name: 'MongoDB', color: '' },
-      { name: 'NextAuth', color: '' },
-      { name: 'Supabase', color: '' },
+      { name: 'next.js', color: '' },
+      { name: 'mongodb', color: '' },
+      { name: 'nextauth', color: '' },
+      { name: 'supabase', color: '' },
     ],
     image: '/images/projects/todocards.jpg',
     source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
@@ -356,25 +366,25 @@ const projects = [
     description:
       'Luxury hotel website with an integrated admin panel featuring dashboard charts, booking management, cabin CRUD, guest records, and dark mode.',
     tags: [
-      { name: 'Next.js', color: '' },
-      { name: 'Supabase', color: '' },
-      { name: 'TanStack Query', color: '' },
-      { name: 'Recharts', color: '' },
+      { name: 'next.js', color: '' },
+      { name: 'supabase', color: '' },
+      { name: 'tanstack query', color: '' },
+      { name: 'recharts', color: '' },
     ],
     image: '/images/projects/elysantium.jpg',
     source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
-    link: 'https://elysantium.vercel.app',
+    link: 'https://elysantium.nejcfurh.dev',
   },
   {
     name: 'Domavia',
     description:
       'A real estate listing platform for browsing and publishing properties for rent or sale. Find a house. Make it your home.',
     tags: [
-      { name: 'Next.js', color: '' },
-      { name: 'Supabase', color: '' },
-      { name: 'Firebase Auth', color: '' },
-      { name: 'Tailwind', color: '' },
-      { name: 'Shadcn/ui', color: '' },
+      { name: 'next.js', color: '' },
+      { name: 'supabase', color: '' },
+      { name: 'firebase auth', color: '' },
+      { name: 'tailwind', color: '' },
+      { name: 'shadcn/ui', color: '' },
     ],
     image: '/images/projects/domavia.jpg',
     source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
@@ -385,9 +395,9 @@ const projects = [
     description:
       'Personal development blog platform with admin authentication, CRUD operations, MongoDB persistence, and posts sorted by date with image support.',
     tags: [
-      { name: 'Next.js', color: '' },
-      { name: 'MongoDB', color: '' },
-      { name: 'NextAuth', color: '' },
+      { name: 'next.js', color: '' },
+      { name: 'mongodb', color: '' },
+      { name: 'nextauth', color: '' },
     ],
     image: '/images/projects/devblog.jpg',
     source_code_link: 'https://github.com/nejcfurh/nejcfurh-studio',
@@ -397,7 +407,7 @@ const projects = [
 
 const droneShotVideos = [
   {
-    title: 'Monterrigioni, Italy',
+    title: 'Monteriggioni, Italy',
     video: '/videos/drone-shots/monteriggioni.mp4',
     poster: '/images/drone-shots/monteriggioni.jpg',
   },

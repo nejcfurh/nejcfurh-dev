@@ -16,7 +16,7 @@ import AnimatedImage from '@/app/components/motion/AnimatedImage';
 import AnimatedSpan from '@/app/components/motion/AnimatedSpan';
 import AnimatedSubHeading from '@/app/components/motion/AnimatedSubHeading';
 import AnimatedText from '@/app/components/motion/AnimatedText';
-import { projects } from '../constants';
+import { projects } from '../../constants';
 
 const overlayContainer: Variants = {
   hidden: {},

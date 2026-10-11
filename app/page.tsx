@@ -10,6 +10,7 @@ import Contact from "./features/homepage/components/Contact";
 import Footer from "./features/homepage/components/Footer";
 import ScrollProgress from "./components/ScrollProgress";
 import GrainOverlay from "./components/GrainOverlay";
+import GlowMask from "./components/GlowMask";
 import { ReactLenis } from "lenis/react";
 import { PageVisitTracker } from "./analytics/PageVisitTracker";
 
@@ -19,6 +20,7 @@ export default function Home(): JSX.Element {
       <main className="relative bg-primary">
         <PageVisitTracker pageEvent={{ pageName: "Home" }} />
         <GrainOverlay />
+        <GlowMask />
         <ScrollProgress />
         <Navbar />
         <Hero />

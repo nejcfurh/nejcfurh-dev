@@ -53,9 +53,6 @@ const Hero = (): JSX.Element => {
       id="hero"
       className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden py-24 sm:py-0"
     >
-      {/* GRADIENT ORB */}
-      <div className="gradient-orb gradient-orb-accent w-[400px] h-[400px] hidden sm:block -bottom-[150px] -left-[150px] absolute" />
-
       <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 w-full flex flex-col lg:flex-row items-center lg:items-end lg:justify-between gap-12 lg:gap-8">
         {/* TEXT CONTENT */}
         <div className="flex-1 min-w-0">

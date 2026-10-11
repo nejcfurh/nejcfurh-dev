@@ -22,6 +22,7 @@ import nextjs from './images/icons/next.svg';
 // EXPERIENCE
 import advisera from './images/experience/advisera.png';
 import birdbuddy from './images/experience/birdbuddy.png';
+import freelance from './images/experience/freelance.png';
 import mzez from './images/experience/mzez.png';
 
 export {
@@ -45,4 +46,5 @@ export {
   advisera,
   mzez,
   birdbuddy,
+  freelance,
 };
