@@ -109,7 +109,7 @@ The site runs at <http://localhost:3000>. Every variable in `.env.example` is op
 | **Analytics** | [PostHog](https://posthog.com) (posthog-js) |
 | **Tooling** | ESLint 10, GitHub Actions |
 
-## 🗺️ Project Structure
+## 📁 Project Structure
 
 ```text
 app/
@@ -129,7 +129,7 @@ app/
 public/                           # Images, drone videos, fonts, CV
 ```
 
-## ⚙️ Configuration
+## 🔧 Configuration
 
 ### Analytics
 
@@ -152,7 +152,7 @@ The contact form sends through EmailJS from the browser. While any of these is u
 | `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID` | EmailJS template ID. |
 | `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY` | EmailJS public key. |
 
-## ☁️ Deployment
+## 🌐 Deployment
 
 The site is deployed on **Vercel**. The apex domain redirects to `www.nejcfurh.dev`, which is the canonical host for URLs, the sitemap and social cards.
 
